@@ -1,0 +1,560 @@
+/* ═══════════════════════════════════════════════════════════
+   Espaço Garden Eventos — folha única
+   Paleta extraída do arquivo real do logo (_inbox/GARDEN VETOR.png)
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  /* cor */
+  --folha:      #A9BE63;   /* verde do logo — acento, nunca texto sobre claro */
+  --folha-esc:  #5C6C2D;   /* folha escurecida até passar AA (4.5:1) nos 3 fundos claros */
+  --mata:       #33452E;   /* verde profundo — estrutura e texto forte */
+  --mata-esc:   #22301E;
+  --salvia:     #E4E7CE;   /* fundos suaves */
+  --salvia-cl:  #F1F3E4;
+  --base:       #FAFAF4;   /* off-white */
+  --carvao:     #1E1F1B;   /* corpo de texto */
+  --cinza:      #5B5F55;   /* texto secundário */
+  --borda:      #D8DCC4;
+
+  /* tipografia */
+  --display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --corpo:   "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* medida */
+  --wrap: 1160px;
+  --gutter: clamp(1.25rem, 5vw, 3rem);
+  --ritmo: clamp(3.5rem, 9vw, 7rem);
+  --raio: 3px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+
+html{ scroll-behavior:smooth; scroll-padding-top:5rem; }
+@media (prefers-reduced-motion:reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation-duration:.01ms !important; transition-duration:.01ms !important; }
+}
+
+body{
+  margin:0;
+  background:var(--base);
+  color:var(--carvao);
+  font-family:var(--corpo);
+  font-size:1.0625rem;        /* 17px — público adulto/sênior lê melhor */
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+img{ max-width:100%; height:auto; display:block; }
+
+h1,h2,h3{ font-family:var(--display); font-weight:500; color:var(--mata); line-height:1.12; margin:0 0 .5em; letter-spacing:-.01em; }
+h1{ font-size:clamp(2.5rem, 6.2vw, 5rem); }
+h2{ font-size:clamp(1.9rem, 4.5vw, 3rem); }
+h3{ font-size:clamp(1.25rem, 2.4vw, 1.6rem); }
+p{ margin:0 0 1.1em; }
+a{ color:var(--mata); }
+
+:focus-visible{ outline:3px solid var(--folha-esc); outline-offset:3px; border-radius:2px; }
+
+.wrap{ width:100%; max-width:var(--wrap); margin-inline:auto; padding-inline:var(--gutter); }
+.wrap--estreito{ max-width:760px; }
+
+.skip{
+  position:absolute; left:-9999px; top:0; z-index:100;
+  background:var(--mata); color:var(--base); padding:.75rem 1.25rem;
+}
+.skip:focus{ left:.5rem; top:.5rem; }
+
+.sobrancelha{
+  font-size:.75rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+  color:var(--folha-esc); margin:0 0 .9rem;
+}
+
+/* ── botões ─────────────────────────────────────────────── */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-height:48px; padding:.8rem 1.6rem;
+  background:var(--mata); color:var(--base);
+  font-family:var(--corpo); font-size:.95rem; font-weight:600; letter-spacing:.01em;
+  text-decoration:none; border:1.5px solid var(--mata); border-radius:var(--raio);
+  transition:background .2s ease, color .2s ease, transform .2s ease;
+}
+.btn:hover{ background:var(--mata-esc); border-color:var(--mata-esc); transform:translateY(-1px); }
+.btn--vazado{ background:transparent; color:var(--mata); }
+.btn--vazado:hover{ background:var(--mata); color:var(--base); }
+.btn--pequeno{ min-height:42px; padding:.5rem 1.1rem; font-size:.875rem; }
+.btn--grande{ min-height:56px; padding:1rem 2.25rem; font-size:1.05rem; }
+
+/* ── topo ───────────────────────────────────────────────── */
+.topo{
+  position:sticky; top:0; z-index:50;
+  background:rgba(250,250,244,.94);
+  backdrop-filter:saturate(1.4) blur(10px);
+  border-bottom:1px solid var(--borda);
+}
+.topo__linha{ display:flex; align-items:center; gap:1.5rem; min-height:72px; }
+.topo__marca{ display:flex; align-items:center; gap:.65rem; text-decoration:none; margin-right:auto; }
+.topo__logo{ width:44px; height:44px; object-fit:contain; }
+.topo__logo.is-vazio{ display:none; }
+.topo__nome{ display:flex; flex-direction:column; line-height:1.05; }
+.topo__nome strong{ font-family:var(--display); font-size:1.2rem; font-weight:600; color:var(--mata); letter-spacing:.02em; }
+.topo__nome em{ font-style:normal; font-size:.68rem; letter-spacing:.24em; text-transform:uppercase; color:var(--cinza); }
+.topo__linha > .btn{ display:none; }
+@media (min-width:560px){ .topo__linha > .btn{ display:inline-flex; } }
+.topo__nav{ display:none; gap:1.75rem; }
+.topo__nav a{ font-size:.92rem; font-weight:500; color:var(--cinza); text-decoration:none; padding:.4rem 0; border-bottom:1.5px solid transparent; }
+.topo__nav a:hover{ color:var(--mata); border-bottom-color:var(--folha); }
+@media (min-width:1000px){ .topo__nav{ display:flex; } }
+
+/* ── hero ───────────────────────────────────────────────── */
+/* foto e texto ocupam a MESMA célula do grid: a altura é sempre a do
+   maior dos dois, então o título nunca é cortado — com ou sem foto. */
+.hero{
+  display:grid; grid-template-areas:"palco";
+  background:var(--mata); overflow:hidden;
+  min-height:min(88vh, 780px);
+}
+.hero > *{ grid-area:palco; }
+.hero__foto{ position:relative; align-self:stretch; min-height:0; }
+.hero__foto img{ width:100%; height:100%; object-fit:cover; opacity:.62; }
+.hero__foto::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(34,48,30,.30) 0%, rgba(34,48,30,.55) 50%, rgba(34,48,30,.93) 100%);
+}
+.hero__texto{
+  align-self:end; z-index:2;
+  padding-top:clamp(5rem,14vw,9rem);
+  padding-bottom:clamp(2.5rem,6vw,4.5rem);
+}
+.hero__texto h1{ color:var(--base); max-width:16ch; margin-bottom:.55em; }
+.hero .sobrancelha{ color:var(--folha); }
+.hero__linha{ color:#E9EDDF; font-size:clamp(1.02rem,1.9vw,1.2rem); max-width:52ch; }
+.hero__acoes{ display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.75rem; }
+.hero__acoes .btn{ background:var(--folha); border-color:var(--folha); color:var(--mata-esc); }
+.hero__acoes .btn:hover{ background:#BACF75; border-color:#BACF75; }
+.hero__acoes .btn--vazado{ background:transparent; border-color:rgba(233,237,223,.55); color:#E9EDDF; }
+.hero__acoes .btn--vazado:hover{ background:rgba(233,237,223,.12); border-color:#E9EDDF; }
+.hero__nota{ margin:1.1rem 0 0; font-size:.9rem; color:rgba(233,237,223,.72); }
+@media (min-width:900px){ .hero{ min-height:min(84vh, 820px); } }
+
+/* ── prova ──────────────────────────────────────────────── */
+.prova{ background:var(--salvia); border-bottom:1px solid var(--borda); }
+.prova__grade{ display:grid; grid-template-columns:repeat(2,1fr); gap:1.75rem 1.25rem; padding-block:clamp(2rem,5vw,3rem); }
+.prova__item{ display:flex; flex-direction:column; gap:.25rem; }
+.prova__item strong{ font-family:var(--display); font-size:clamp(1.9rem,4vw,2.6rem); font-weight:600; color:var(--mata); line-height:1; }
+.prova__item span{ font-size:.875rem; color:var(--cinza); max-width:22ch; }
+@media (min-width:820px){ .prova__grade{ grid-template-columns:repeat(4,1fr); } }
+
+/* ── seções ─────────────────────────────────────────────── */
+.secao{ padding-block:var(--ritmo); }
+.secao--claro{ background:var(--salvia-cl); }
+.secao__intro{ max-width:62ch; font-size:1.075rem; color:var(--cinza); margin-bottom:2.75rem; }
+
+/* ── galeria ────────────────────────────────────────────── */
+.galeria{ list-style:none; margin:0 0 2.5rem; padding:0; display:grid; grid-template-columns:1fr; gap:1rem; }
+.galeria figure{ margin:0; position:relative; }
+.galeria img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--raio); }
+.galeria--largo img,.galeria__item--largo img{ aspect-ratio:16/9; }
+.galeria figcaption{ margin-top:.6rem; font-size:.85rem; color:var(--cinza); }
+@media (min-width:760px){
+  .galeria{ grid-template-columns:repeat(2,1fr); gap:1.5rem; }
+  .galeria__item--largo{ grid-column:1 / -1; }
+}
+
+/* placeholder — aparece só enquanto a foto real não existe */
+.ph{ display:none; }
+.is-vazio{ position:relative; }
+.is-vazio img{ display:none; }
+.is-vazio .ph{
+  display:flex; align-items:center; justify-content:center; text-align:center;
+  aspect-ratio:4/3; margin:0; padding:1rem;
+  background:repeating-linear-gradient(135deg,var(--salvia) 0 12px,var(--salvia-cl) 12px 24px);
+  border:1px dashed var(--folha-esc); border-radius:var(--raio);
+  font-size:.8rem; letter-spacing:.06em; text-transform:uppercase; color:var(--folha-esc);
+}
+.galeria__item--largo .is-vazio .ph{ aspect-ratio:16/9; }
+.hero__foto.is-vazio{ background:var(--mata); }
+.hero__foto.is-vazio .ph{
+  position:absolute; inset:0; z-index:0; aspect-ratio:auto;
+  align-items:start; justify-content:end; padding:1.25rem 1.5rem;
+  background:repeating-linear-gradient(135deg,rgba(169,190,99,.045) 0 14px,transparent 14px 28px);
+  border:none; font-size:.68rem; color:rgba(233,237,223,.22);
+}
+
+/* ── chips ──────────────────────────────────────────────── */
+.chips{ list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:.6rem; }
+.chips li{
+  padding:.5rem 1rem; background:var(--base); border:1px solid var(--borda);
+  border-radius:100px; font-size:.875rem; color:var(--mata);
+}
+
+/* ── pacotes ────────────────────────────────────────────── */
+.pacotes{ display:grid; grid-template-columns:1fr; gap:1.5rem; margin-bottom:2.5rem; }
+@media (min-width:860px){ .pacotes{ grid-template-columns:repeat(2,1fr); gap:2rem; } }
+.pacote{
+  display:flex; flex-direction:column;
+  background:var(--base); border:1px solid var(--borda); border-radius:var(--raio);
+  padding:clamp(1.75rem,3.5vw,2.5rem);
+}
+.pacote--destaque{ border-color:var(--mata); border-width:1.5px; box-shadow:0 18px 44px -28px rgba(34,48,30,.45); }
+.pacote h3{ margin-bottom:.15em; }
+.pacote__dias{ font-size:.85rem; letter-spacing:.04em; color:var(--folha-esc); font-weight:600; margin-bottom:1.5rem; }
+.pacote__preco{ display:flex; flex-direction:column; gap:.15rem; padding-bottom:1.5rem; margin-bottom:1.5rem; border-bottom:1px solid var(--borda); }
+.pacote__preco span{ font-size:.82rem; color:var(--cinza); }
+.pacote__preco strong{ font-family:var(--display); font-size:clamp(2.1rem,4.5vw,2.7rem); font-weight:600; color:var(--mata); line-height:1.05; }
+.pacote__lista{ list-style:none; margin:0 0 2rem; padding:0; display:flex; flex-direction:column; gap:.7rem; flex:1; }
+.pacote__lista li{ position:relative; padding-left:1.6rem; font-size:.97rem; }
+.pacote__lista li::before{
+  content:""; position:absolute; left:0; top:.55em;
+  width:8px; height:8px; border-radius:50%; background:var(--folha);
+}
+.pacote .btn{ align-self:flex-start; }
+
+.aviso{ background:var(--base); border-left:3px solid var(--folha); padding:1.5rem 1.75rem; border-radius:var(--raio); }
+.aviso p:last-child{ margin-bottom:0; }
+.aviso__pagamento{ font-size:.92rem; color:var(--cinza); }
+
+/* ── passos ─────────────────────────────────────────────── */
+.passos{ list-style:none; margin:0; padding:0; display:grid; grid-template-columns:1fr; gap:2.25rem; }
+@media (min-width:760px){ .passos{ grid-template-columns:repeat(2,1fr); gap:2.75rem 3rem; } }
+.passos li{ position:relative; padding-top:.5rem; border-top:1px solid var(--borda); }
+.passos__n{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:34px; height:34px; margin-bottom:.9rem;
+  background:var(--salvia); border-radius:50%;
+  font-family:var(--display); font-size:1.05rem; font-weight:600; color:var(--mata);
+}
+.passos h3{ margin-bottom:.4em; }
+.passos p{ color:var(--cinza); margin:0; max-width:44ch; }
+
+/* ── faq ────────────────────────────────────────────────── */
+.faq{ border-top:1px solid var(--borda); }
+.faq details{ border-bottom:1px solid var(--borda); }
+.faq summary{
+  cursor:pointer; list-style:none; padding:1.25rem 2.5rem 1.25rem 0; position:relative;
+  font-family:var(--display); font-size:clamp(1.1rem,2.2vw,1.35rem); color:var(--mata);
+}
+.faq summary::-webkit-details-marker{ display:none; }
+.faq summary::after{
+  content:"+"; position:absolute; right:.25rem; top:50%; transform:translateY(-50%);
+  font-family:var(--corpo); font-size:1.4rem; font-weight:400; color:var(--folha-esc);
+  transition:transform .2s ease;
+}
+.faq details[open] summary::after{ content:"−"; }
+.faq details p{ margin:0 0 1.4rem; color:var(--cinza); max-width:62ch; }
+
+/* ── onde fica ──────────────────────────────────────────── */
+.onde{ display:grid; grid-template-columns:1fr; gap:2.5rem; align-items:start; }
+@media (min-width:900px){ .onde{ grid-template-columns:1fr 1.1fr; gap:4rem; } }
+.onde address{ font-style:normal; font-size:1.1rem; line-height:1.7; color:var(--mata); margin-bottom:1.75rem; }
+.onde__dados{ display:grid; grid-template-columns:auto 1fr; gap:.5rem 1.25rem; margin:0 0 2rem; font-size:.95rem; }
+.onde__dados dt{ font-weight:600; color:var(--mata); }
+.onde__dados dd{ margin:0; color:var(--cinza); }
+.onde__acoes{ display:flex; flex-wrap:wrap; gap:.75rem; margin:0; }
+.onde__mapa{ border:1px solid var(--borda); border-radius:var(--raio); overflow:hidden; }
+.onde__mapa iframe{ display:block; width:100%; height:clamp(300px,48vw,440px); border:0; }
+
+/* ── fechamento ─────────────────────────────────────────── */
+.fechamento{ background:var(--mata); color:var(--base); padding-block:var(--ritmo); text-align:center; }
+.fechamento h2{ color:var(--base); }
+.fechamento p{ color:#D3DAC5; max-width:48ch; margin-inline:auto; }
+.fechamento .btn{ background:var(--folha); border-color:var(--folha); color:var(--mata-esc); margin-top:1.25rem; }
+.fechamento .btn:hover{ background:#BACF75; border-color:#BACF75; }
+.fechamento__nota{ font-size:.875rem; color:rgba(211,218,197,.7); margin:1rem 0 0; }
+
+/* ── rodapé ─────────────────────────────────────────────── */
+.rodape{ background:var(--mata-esc); color:#C6CEB6; padding-top:clamp(2.5rem,5vw,3.5rem); font-size:.9rem; }
+.rodape__grade{ display:grid; grid-template-columns:1fr; gap:2rem; padding-bottom:2.25rem; }
+@media (min-width:760px){ .rodape__grade{ grid-template-columns:1.2fr 1fr; } }
+.rodape__marca{ font-family:var(--display); font-size:1.25rem; color:var(--base); margin:0 0 .4rem; }
+.rodape__marca strong{ font-weight:600; }
+.rodape address{ font-style:normal; line-height:1.6; margin:0; }
+.rodape__nav{ display:flex; flex-wrap:wrap; gap:.75rem 1.5rem; align-content:start; }
+.rodape__nav a{ color:#C6CEB6; text-decoration:none; border-bottom:1px solid transparent; }
+.rodape__nav a:hover{ color:var(--base); border-bottom-color:var(--folha); }
+.rodape__base{ border-top:1px solid rgba(198,206,182,.18); padding-block:1.25rem; }
+.rodape__base p{ margin:0; font-size:.8rem; color:rgba(198,206,182,.65); }
+
+/* ── botão flutuante ────────────────────────────────────── */
+.flutuante{
+  position:fixed; right:1rem; bottom:1rem; z-index:60;
+  display:inline-flex; align-items:center; gap:.5rem;
+  min-height:52px; padding:.75rem 1.35rem;
+  background:var(--mata); color:var(--base);
+  border-radius:100px; text-decoration:none;
+  font-size:.92rem; font-weight:600;
+  box-shadow:0 12px 32px -12px rgba(34,48,30,.6);
+  transition:transform .2s ease, background .2s ease;
+}
+.flutuante:hover{ background:var(--mata-esc); transform:translateY(-2px); }
+@media (min-width:1000px){ .flutuante{ right:1.75rem; bottom:1.75rem; } }
+
+/* ── aviso de placeholder (só em dev) ───────────────────── */
+.dev-aviso{
+  position:relative; z-index:99;
+  background:#8A2B2B; color:#fff; padding:.55rem 1rem;
+  font-size:.78rem; font-weight:600; text-align:center; letter-spacing:.02em;
+}
+
+
+/* ═══════════════════════════════════════════════════════════
+   MOVIMENTO
+   Regra da casa: só transform e opacity. Curva longa e calma
+   (a mesma sensação de uma cortina abrindo, não de um pop-up).
+   Tudo desliga em prefers-reduced-motion.
+   ═══════════════════════════════════════════════════════════ */
+
+:root{
+  --curva: cubic-bezier(.16,1,.3,1);   /* saída suave, entrada firme */
+  --lento: 1.05s;
+}
+
+/* ── reveal: o elemento sobe e aparece quando entra na tela ── */
+/* o esconder só existe quando há JS pra revelar de volta:
+   sem script, a página aparece inteira em vez de ficar em branco */
+.js [data-reveal]{
+  opacity:0;
+  transform:translate3d(0, 22px, 0);
+  transition:opacity var(--lento) var(--curva), transform var(--lento) var(--curva);
+  transition-delay:var(--atraso, 0ms);
+  will-change:transform, opacity;
+}
+.js [data-reveal].is-visivel{ opacity:1; transform:none; }
+
+/* variante lateral — usada nos blocos de texto ao lado de foto */
+.js [data-reveal="lado"]{ transform:translate3d(-24px, 0, 0); }
+
+/* ── título do hero: revelado linha a linha, por trás de uma máscara ── */
+.linha{ display:block; overflow:hidden; }
+.js .linha > span{
+  display:block;
+  transform:translate3d(0, 105%, 0);
+  transition:transform 1.15s var(--curva);
+  transition-delay:var(--atraso, 0ms);
+}
+.js .is-aberto .linha > span{ transform:none; }
+
+/* ── hero: a foto respira devagar (Ken Burns discreto) ── */
+.js .hero__foto img{
+  transform:scale(1.06);
+  transition:transform 2.4s var(--curva), opacity 1.6s ease;
+  opacity:0;
+}
+.js .is-aberto .hero__foto img{ transform:scale(1); opacity:.62; }
+
+/* parallax: o JS empurra --deslize conforme o scroll */
+.hero__foto{ transform:translate3d(0, var(--deslize, 0px), 0); }
+
+/* ── filete que se desenha sob a sobrancelha de seção ── */
+.sobrancelha{ position:relative; padding-bottom:.75rem; }
+.sobrancelha::after{
+  content:""; position:absolute; left:0; bottom:0;
+  width:100%; height:1px; background:var(--folha);
+  max-width:2.5rem;
+  transform-origin:left;
+  transition:transform 1.1s var(--curva) .15s;
+}
+.js .sobrancelha::after{ transform:scaleX(0); }
+[data-reveal].is-visivel .sobrancelha::after,
+.sobrancelha[data-reveal].is-visivel::after{ transform:scaleX(1); }
+.hero .sobrancelha::after{ background:var(--folha); }
+
+/* ── galeria: a foto aproxima devagar, a legenda acompanha ── */
+.galeria figure{ overflow:hidden; border-radius:var(--raio); }
+.galeria img{ transition:transform 1.4s var(--curva); }
+.galeria figure:hover img{ transform:scale(1.045); }
+.galeria figcaption{
+  padding-inline:.1rem;
+  transition:color .5s var(--curva);
+}
+.galeria figure:hover figcaption{ color:var(--mata); }
+
+/* ── chips: acendem no hover ── */
+.chips li{ transition:background .35s var(--curva), border-color .35s var(--curva), transform .35s var(--curva); }
+.chips li:hover{ background:var(--salvia); border-color:var(--folha); transform:translateY(-2px); }
+
+/* ── pacote em destaque: sobe de leve quando o mouse chega ── */
+.pacote{ transition:transform .6s var(--curva), box-shadow .6s var(--curva); }
+.pacote:hover{ transform:translateY(-4px); }
+.pacote--destaque:hover{ box-shadow:0 26px 60px -30px rgba(34,48,30,.55); }
+
+/* ── números da prova: contam ao entrar na tela ── */
+.prova__item strong{ font-variant-numeric:lining-nums tabular-nums; }
+
+/* ── passos: a linha de cima se desenha ── */
+.passos li{ position:relative; }
+.passos li::before{
+  content:""; position:absolute; left:0; top:-1px; height:1px; width:100%;
+  background:var(--folha); transform-origin:left;
+  transition:transform 1.2s var(--curva); transition-delay:var(--atraso, 0ms);
+}
+.js .passos li::before{ transform:scaleX(0); }
+.passos li.is-visivel::before{ transform:scaleX(1); }
+
+/* ── botão flutuante: entra depois que a página assenta ── */
+.js .flutuante{
+  opacity:0; transform:translate3d(0, 16px, 0);
+  transition:opacity .8s var(--curva), transform .8s var(--curva), background .3s ease;
+}
+.js .flutuante.is-visivel{ opacity:1; transform:none; }
+.flutuante.is-visivel:hover{ transform:translateY(-3px); }
+
+/* ── desliga tudo para quem pediu menos movimento ── */
+@media (prefers-reduced-motion:reduce){
+  [data-reveal],
+  [data-reveal].is-visivel{ opacity:1 !important; transform:none !important; transition:none !important; }
+  .linha > span{ transform:none !important; transition:none !important; }
+  .hero__foto{ transform:none !important; }
+  .hero__foto img{ transform:none !important; opacity:.62 !important; transition:none !important; }
+  .sobrancelha::after{ transform:scaleX(1) !important; transition:none !important; }
+  .passos li::before{ transform:scaleX(1) !important; transition:none !important; }
+  .flutuante{ transition:none !important; }
+  .galeria figure:hover img,
+  .pacote:hover,
+  .chips li:hover{ transform:none !important; }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ACABAMENTO
+   Camada de refino: ornamento da marca, respiro editorial,
+   overlay da galeria e os detalhes que separam "site feito"
+   de "site caprichado".
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── ornamento botânico do hero ─────────────────────────── */
+.hero__ornamento{
+  grid-area:palco; z-index:1; justify-self:end; align-self:center;
+  width:min(52vw, 660px); height:auto;
+  margin-right:clamp(-5rem, -3vw, -.5rem);
+  opacity:.24; mix-blend-mode:screen; pointer-events:none;
+  filter:saturate(1.15) brightness(1.1);
+  transition:opacity 2s var(--curva) .5s, transform 2.4s var(--curva) .5s;
+}
+.js .hero__ornamento{ opacity:0; transform:translate3d(0, 18px, 0) scale(1.04); }
+.js .is-aberto .hero__ornamento{ opacity:.24; transform:none; }
+@media (max-width:760px){ .hero__ornamento{ width:88vw; margin-right:-18vw; align-self:start; margin-top:8vh; } }
+@media (max-width:760px){ .hero__ornamento, .js .is-aberto .hero__ornamento{ opacity:.11; } }
+
+/* filete vertical que ancora o bloco de texto */
+.hero__texto{ position:relative; }
+.hero__texto::before{
+  content:""; position:absolute; left:calc(var(--gutter) - 1.25rem); top:22%; bottom:28%;
+  width:1px; background:linear-gradient(180deg, transparent, var(--folha) 22%, var(--folha) 78%, transparent);
+  transform-origin:top;
+  transition:transform 1.6s var(--curva) .35s;
+}
+.js .hero__texto::before{ transform:scaleY(0); }
+.js .is-aberto .hero__texto::before{ transform:scaleY(1); }
+@media (max-width:640px){ .hero__texto::before{ display:none; } }
+
+/* ── indicador de rolagem ───────────────────────────────── */
+.hero__rolar{
+  display:none; margin-top:2.25rem;
+  width:26px; height:42px; border:1.5px solid rgba(233,237,223,.4); border-radius:14px;
+  position:relative;
+  transition:opacity 1s var(--curva) 1.3s, border-color .3s ease;
+}
+.hero__rolar:hover{ border-color:var(--folha); }
+.hero__rolar span{
+  position:absolute; left:50%; top:9px; width:3px; height:7px; margin-left:-1.5px;
+  background:var(--folha); border-radius:2px;
+  animation:descer 2.1s var(--curva) infinite;
+}
+@keyframes descer{
+  0%,15%   { transform:translateY(0);    opacity:0; }
+  30%      { opacity:1; }
+  70%,100% { transform:translateY(15px); opacity:0; }
+}
+.js .hero__rolar{ opacity:0; }
+.js .is-aberto .hero__rolar{ opacity:1; }
+@media (min-width:900px) and (min-height:760px){ .hero__rolar{ display:block; } }
+@media (prefers-reduced-motion:reduce){
+  .hero__rolar span{ animation:none; opacity:1; }
+  .hero__ornamento{ opacity:.24 !important; transform:none !important; transition:none !important; }
+  .hero__texto::before{ transform:scaleY(1) !important; transition:none !important; }
+}
+
+/* ── barra de números: separadores e mais presença ──────── */
+.prova__grade{ position:relative; }
+.prova__item{ position:relative; padding-left:0; }
+@media (min-width:820px){
+  .prova__item + .prova__item{ padding-left:2rem; }
+  .prova__item + .prova__item::before{
+    content:""; position:absolute; left:0; top:.35rem; bottom:.35rem;
+    width:1px; background:var(--borda);
+  }
+}
+.prova__item strong{ font-size:clamp(2.1rem,4.4vw,3rem); letter-spacing:-.02em; }
+
+/* ── respiro editorial ──────────────────────────────────── */
+.respiro{
+  background:var(--mata); color:var(--base);
+  padding-block:clamp(4rem,10vw,7.5rem);
+  position:relative; overflow:hidden;
+  text-align:center;
+}
+.respiro::before{
+  content:""; position:absolute; left:50%; top:-40%; width:min(120vw,900px); aspect-ratio:1;
+  transform:translateX(-50%);
+  background:radial-gradient(circle, rgba(169,190,99,.10) 0%, transparent 62%);
+  pointer-events:none;
+}
+.respiro blockquote{
+  margin:0; position:relative;
+  font-family:var(--display); font-weight:400;
+  font-size:clamp(1.6rem,3.6vw,2.5rem); line-height:1.32; color:var(--base);
+  letter-spacing:-.005em;
+}
+.respiro em{ display:block; margin-top:.5em; font-style:normal; color:var(--folha); }
+
+/* ── galeria: legenda vira overlay sobre a foto ─────────── */
+.galeria figure{ position:relative; }
+.galeria figcaption{
+  position:absolute; left:0; right:0; bottom:0; margin:0;
+  padding:2.5rem 1.25rem 1.1rem;
+  background:linear-gradient(180deg, transparent, rgba(30,31,27,.82));
+  color:var(--base); font-size:.9rem;
+  opacity:0; transform:translate3d(0,10px,0);
+  transition:opacity .6s var(--curva), transform .6s var(--curva);
+}
+.galeria figure:hover figcaption,
+.galeria figure:focus-within figcaption{ opacity:1; transform:none; color:var(--base); }
+/* sem foto, a legenda precisa continuar legível */
+.galeria figure.is-vazio figcaption{
+  position:static; opacity:1; transform:none; padding:.6rem 0 0;
+  background:none; color:var(--cinza);
+}
+@media (hover:none){
+  .galeria figcaption{ opacity:1; transform:none; }
+}
+
+/* ── botões: o preenchimento desliza de baixo ───────────── */
+.btn{ position:relative; overflow:hidden; isolation:isolate; }
+.btn::before{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:var(--mata-esc);
+  transform:translateY(101%);
+  transition:transform .55s var(--curva);
+}
+.btn:hover::before{ transform:translateY(0); }
+.btn:hover{ background:var(--mata); }        /* o ::before é quem muda a cor */
+.btn--vazado::before{ background:var(--mata); }
+.btn--vazado:hover{ background:transparent; color:var(--base); }
+.hero__acoes .btn::before{ background:#C3D882; }
+.hero__acoes .btn:hover{ background:var(--folha); }
+.hero__acoes .btn--vazado::before{ background:rgba(233,237,223,.14); }
+.hero__acoes .btn--vazado:hover{ background:transparent; }
+.fechamento .btn::before{ background:#C3D882; }
+.fechamento .btn:hover{ background:var(--folha); }
+@media (prefers-reduced-motion:reduce){
+  .btn::before{ transition:none; }
+  .galeria figcaption{ opacity:1 !important; transform:none !important; }
+}
+
+/* ── passos: número com mais presença ───────────────────── */
+.passos__n{ width:42px; height:42px; font-size:1.2rem; border:1px solid var(--borda); background:transparent; }
+.passos li.is-visivel .passos__n{ background:var(--salvia); transition:background .8s var(--curva) .3s; }
+
+/* ── seleção de texto na cor da casa ────────────────────── */
+::selection{ background:var(--folha); color:var(--mata-esc); }

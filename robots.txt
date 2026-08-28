@@ -1,0 +1,7 @@
+# ⚠️ TEMPORÁRIO — o site está no ar sem o número real do WhatsApp.
+# Quando o número entrar em js/garden.js: trocar Disallow por Allow e
+# remover a meta robots=noindex do index.html.
+User-agent: *
+Disallow: /
+
+Sitemap: https://espacogardeneventos.com.br/sitemap.xml
