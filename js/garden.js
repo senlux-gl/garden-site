@@ -4,9 +4,9 @@
    ═══════════════════════════════════════════════════════════ */
 
 const GARDEN = {
-  /* ⚠️ PLACEHOLDER — trocar pelo número real que a Gabi atende.
-     Formato: 55 + DDD + número, só dígitos — ex.: 55 21 9XXXX-XXXX vira "5521 9XXXXXXXX" sem espaços */
-  whatsapp: "SUBSTITUIR",
+  /* Número oficial do Espaço Garden — é a instância que a Gabi atende em produção.
+     Formato: 55 + DDD + número, só dígitos. */
+  whatsapp: "5521990782367",
 
   /* Mensagem que já vai escrita quando a pessoa abre a conversa.
      A origem entra no fim, pra sabermos de qual botão do site veio o lead. */
