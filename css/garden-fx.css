@@ -1,0 +1,143 @@
+/* Espaço Garden FX, 22/10/2026. Mesma ideia da camada da Senlux (céu animado no hero, título com brilho,
+   botões com ímã, barra de ação), nas cores do Garden: vagalumes dourados, folha e mata.
+   Desliga com prefers-reduced-motion. */
+
+/* ── hero: fotos que se trocam devagar (Ken Burns) ───────── */
+.hero__foto{ overflow:hidden; }
+.js .hero .hero__foto img.fx-slide, .hero .hero__foto img.fx-slide{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  opacity:0; transform:scale(1.12); z-index:0;
+  transition:opacity 1.8s ease, transform 9s linear;
+}
+.js .hero .hero__foto img.fx-slide.is-ativa, .hero .hero__foto img.fx-slide.is-ativa{ opacity:.62; transform:scale(1); }
+.hero__foto > img:not(.fx-slide){ position:relative; z-index:0; }
+.js .hero .hero__foto.fx-trocando > img:not(.fx-slide){ opacity:0 !important; transition:opacity 1.8s ease !important; }
+.hero__foto::after{ z-index:1; }
+
+/* ── céu: vagalumes + brilho que segue o dedo/mouse ───────── */
+.fx-ceu{ position:absolute; inset:0; z-index:1; pointer-events:none; grid-area:palco; overflow:hidden; }
+.fx-ceu canvas{ position:absolute; inset:0; }
+.fx-ceu .fx-luz{
+  position:absolute; width:520px; height:520px; left:var(--sx,-999px); top:var(--sy,-999px);
+  transform:translate(-50%,-50%); border-radius:50%;
+  background:radial-gradient(circle, rgba(232,199,122,.20) 0%, rgba(169,190,99,.10) 35%, transparent 70%);
+  transition:left .25s ease-out, top .25s ease-out;
+}
+.fx-ceu .fx-aurora{
+  position:absolute; width:70vmax; height:70vmax; border-radius:50%; filter:blur(70px); opacity:.35;
+  background:radial-gradient(circle, rgba(169,190,99,.55), transparent 65%);
+  left:-20vmax; top:-30vmax; animation:fxAurora 18s ease-in-out infinite alternate;
+}
+.fx-ceu .fx-aurora.b{ left:auto; right:-25vmax; top:auto; bottom:-35vmax; animation-duration:24s;
+  background:radial-gradient(circle, rgba(232,199,122,.45), transparent 65%); }
+@keyframes fxAurora{ to{ transform:translate3d(8vmax,6vmax,0) scale(1.15); } }
+.hero__texto, .hero__ornamento{ z-index:2; }
+
+/* ── selo do hero ─────────────────────────────────────────── */
+.fx-selo{
+  display:inline-flex; align-items:center; gap:.55rem; margin:0 0 1.1rem;
+  padding:.45rem .95rem .45rem .75rem; border-radius:999px;
+  background:rgba(250,250,244,.12); border:1px solid rgba(232,199,122,.45);
+  backdrop-filter:blur(6px); color:#F4EBCF; font-size:.84rem; font-weight:600; letter-spacing:.01em;
+}
+.fx-selo i{ width:8px; height:8px; border-radius:50%; background:#E8C77A; box-shadow:0 0 0 0 rgba(232,199,122,.7); animation:fxPulso 2.2s infinite; }
+@keyframes fxPulso{ 0%{ box-shadow:0 0 0 0 rgba(232,199,122,.7);} 70%{ box-shadow:0 0 0 10px rgba(232,199,122,0);} 100%{ box-shadow:0 0 0 0 rgba(232,199,122,0);} }
+
+/* ── título: palavra-chave com brilho dourado ─────────────── */
+.hero h1 em{
+  font-style:italic; font-weight:500;
+  background:linear-gradient(100deg, #E8C77A 0%, #FFF3D1 25%, #C9DA88 50%, #E8C77A 75%, #FFF3D1 100%);
+  background-size:250% 100%; -webkit-background-clip:text; background-clip:text; color:transparent;
+  animation:fxBrilho 6s linear infinite;
+}
+@keyframes fxBrilho{ to{ background-position:-250% 0; } }
+
+/* ── botões: brilho passando + seta + ímã ─────────────────── */
+.hero__acoes .btn:not(.btn--vazado), .btn--grande, .pacote .btn:not(.btn--vazado){
+  box-shadow:0 10px 30px -10px rgba(169,190,99,.75);
+}
+.hero__acoes .btn:not(.btn--vazado)::after, .btn--grande::after{
+  content:""; position:absolute; top:0; bottom:0; left:-60%; width:40%; z-index:1; pointer-events:none;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+  transform:skewX(-20deg); animation:fxVarre 3.8s ease-in-out infinite 1.5s;
+}
+@keyframes fxVarre{ 0%,60%{ left:-60%; } 100%{ left:130%; } }
+.btn .fx-seta{ display:inline-block; margin-left:.5rem; transition:transform .3s; }
+.btn:hover .fx-seta{ transform:translateX(4px); }
+.fx-ima{ transition:transform .25s cubic-bezier(.2,.8,.2,1); will-change:transform; }
+
+/* ── linha de confiança abaixo dos botões ─────────────────── */
+.fx-confia{ display:flex; flex-wrap:wrap; gap:.4rem 1.1rem; margin:1.1rem 0 0; padding:0; list-style:none;
+  font-size:.86rem; color:rgba(233,237,223,.85); }
+.fx-confia li::before{ content:"✓"; color:#C9DA88; font-weight:700; margin-right:.4rem; }
+
+/* ── barra de progresso de leitura ────────────────────────── */
+.fx-progresso{ position:fixed; top:0; left:0; height:3px; width:100%; z-index:70; transform-origin:0 50%;
+  transform:scaleX(var(--p,0)); background:linear-gradient(90deg,#A9BE63,#E8C77A); pointer-events:none; }
+
+/* ── cartões que inclinam (computador) ────────────────────── */
+.fx-tilt{ transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s; transform-style:preserve-3d; }
+.fx-tilt:hover{ box-shadow:0 24px 50px -24px rgba(34,48,30,.45); }
+.pacote--destaque{ position:relative; }
+.pacote--destaque::before{
+  content:"A mais completa"; position:absolute; top:-.85rem; left:1.5rem; z-index:2;
+  padding:.3rem .8rem; border-radius:999px; background:#E8C77A; color:var(--mata-esc);
+  font-size:.75rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+}
+
+/* ── barra fixa de ação no celular ────────────────────────── */
+.fx-barra{ display:none; }
+@media (max-width:759px){
+  .fx-barra{
+    display:flex; gap:.5rem; position:fixed; left:0; right:0; bottom:0; z-index:65;
+    padding:.6rem .75rem calc(.6rem + env(safe-area-inset-bottom));
+    background:rgba(250,250,244,.96); backdrop-filter:blur(10px); border-top:1px solid var(--borda);
+    transform:translateY(110%); transition:transform .4s cubic-bezier(.2,.8,.2,1);
+  }
+  .fx-barra.is-visivel{ transform:none; }
+  .fx-barra .btn{ flex:1; min-height:50px; padding:.7rem .9rem; font-size:.92rem; }
+  .fx-barra .btn--vazado{ flex:0 0 auto; }
+  .flutuante{ display:none !important; }
+  body{ padding-bottom:76px; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fx-slide{ transition:none; transform:none; }
+  .fx-ceu .fx-aurora, .fx-selo i, .hero h1 em, .hero__acoes .btn::after, .btn--grande::after{ animation:none !important; }
+  .fx-tilt, .fx-ima{ transition:none; transform:none !important; }
+}
+
+/* título mais largo no computador: botões acima da dobra */
+@media (min-width:900px){
+  .hero .hero__texto h1{ max-width:22ch; font-size:clamp(2.6rem,4.6vw,4.1rem); }
+  .hero .hero__texto{ padding-top:clamp(3.5rem,8vw,5.5rem); padding-bottom:clamp(2rem,4vw,3.25rem); }
+}
+@media (min-width:900px){
+  .hero--pagina .hero__texto h1{ max-width:24ch; font-size:clamp(2.4rem,4vw,3.6rem); margin-bottom:.4em; }
+  .hero--pagina .hero__linha{ max-width:62ch; }
+  .hero--pagina .sobrancelha{ margin-bottom:.6rem; }
+  .hero--pagina .hero__acoes{ margin-top:1.25rem; }
+}
+/* a foto não dita a altura do hero; o céu fica preso ao hero */
+.hero{ position:relative; }
+.hero .hero__foto > img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+
+/* ── versão delicada (pedido 22/10): tudo mais suave e lento ── */
+.js .hero .hero__foto img.fx-slide, .hero .hero__foto img.fx-slide{ transform:scale(1.05); transition:opacity 2.6s ease, transform 12s linear; }
+.fx-ceu .fx-aurora{ opacity:.16; animation-duration:30s; }
+.fx-ceu .fx-aurora.b{ animation-duration:38s; }
+.fx-ceu .fx-luz{ width:380px; height:380px; background:radial-gradient(circle, rgba(232,199,122,.09) 0%, rgba(169,190,99,.04) 40%, transparent 70%); }
+.fx-selo{ padding:.32rem .8rem .32rem .65rem; font-size:.78rem; font-weight:500; letter-spacing:.03em;
+  background:rgba(250,250,244,.08); border-color:rgba(232,199,122,.28); color:#EFE7CF; }
+.fx-selo i{ width:6px; height:6px; animation:fxPulsoLeve 3.2s infinite; }
+@keyframes fxPulsoLeve{ 0%{ box-shadow:0 0 0 0 rgba(232,199,122,.45);} 70%{ box-shadow:0 0 0 6px rgba(232,199,122,0);} 100%{ box-shadow:0 0 0 0 rgba(232,199,122,0);} }
+.hero h1 em{ background:linear-gradient(100deg, #E6CF96 0%, #F6EDD4 30%, #DCE3BE 55%, #E6CF96 80%, #F6EDD4 100%);
+  background-size:220% 100%; -webkit-background-clip:text; background-clip:text; animation-duration:12s; }
+.hero__acoes .btn:not(.btn--vazado), .btn--grande, .pacote .btn:not(.btn--vazado){ box-shadow:0 6px 18px -10px rgba(169,190,99,.45); }
+.hero__acoes .btn:not(.btn--vazado)::after, .btn--grande::after{ width:28%; background:linear-gradient(100deg, transparent, rgba(255,255,255,.28), transparent); animation:fxVarreLeve 7s ease-in-out infinite 2.5s; }
+@keyframes fxVarreLeve{ 0%,78%{ left:-60%; } 100%{ left:130%; } }
+.fx-confia{ font-size:.82rem; color:rgba(233,237,223,.75); gap:.3rem 1rem; }
+.fx-confia li::before{ content:"·"; font-weight:400; color:#C9DA88; margin-right:.45rem; }
+.fx-progresso{ height:2px; opacity:.7; }
+.pacote--destaque::before{ background:transparent; border:1px solid #C9B27A; color:#8A6F2F; font-weight:600; font-size:.7rem; letter-spacing:.1em; padding:.22rem .7rem; background-color:var(--base); }
+.fx-tilt:hover{ box-shadow:0 14px 34px -24px rgba(34,48,30,.3); }

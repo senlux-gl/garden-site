@@ -10,7 +10,7 @@ const GARDEN = {
 
   /* Mensagem que já vai escrita quando a pessoa abre a conversa.
      A origem entra no fim, pra sabermos de qual botão do site veio o lead. */
-  saudacao: "Olá! Vim pelo site e gostaria de agendar uma visita ao Espaço Garden.",
+  saudacao: window.GARDEN_SAUDACAO || "Olá! Vim pelo site e gostaria de agendar uma visita ao Espaço Garden.",
 
   endereco: "Estr. Caetano Monteiro, 4036 — Pendotiba, Niterói/RJ, CEP 24320-570",
   visitas:  "Terça a sábado, das 10h às 18h"

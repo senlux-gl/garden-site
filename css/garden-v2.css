@@ -1,0 +1,151 @@
+/* ═══════════════════════════════════════════════════════════
+   Espaço Garden: v2 (4 páginas). Camada sobre garden.css,
+   sem editar a original. 22/10/2026.
+   ═══════════════════════════════════════════════════════════ */
+
+/* ── topo com menu no celular ─────────────────────────────── */
+.topo__nav a[aria-current="page"]{ color:var(--mata); border-bottom-color:var(--folha); }
+.menu-botao{
+  display:inline-flex; flex-direction:column; justify-content:center; gap:5px;
+  width:44px; height:44px; padding:0 10px; background:none; border:1px solid var(--borda);
+  border-radius:var(--raio); cursor:pointer; order:3;
+}
+.menu-botao span{ display:block; height:1.5px; background:var(--mata); transition:transform .3s, opacity .3s; }
+.menu-botao[aria-expanded="true"] span:nth-child(1){ transform:translateY(6.5px) rotate(45deg); }
+.menu-botao[aria-expanded="true"] span:nth-child(2){ opacity:0; }
+.menu-botao[aria-expanded="true"] span:nth-child(3){ transform:translateY(-6.5px) rotate(-45deg); }
+@media (max-width:999px){
+  .topo__linha{ flex-wrap:wrap; }
+  .topo__nav.is-aberto{
+    display:flex; flex-direction:column; gap:0; order:4; width:100%;
+    padding:.25rem 0 1rem; border-top:1px solid var(--borda);
+  }
+  .topo__nav.is-aberto a{ padding:.85rem 0; font-size:1rem; border-bottom:1px solid var(--borda); }
+}
+@media (min-width:1000px){ .menu-botao{ display:none; } }
+
+/* ── hero das páginas internas ───────────────────────────── */
+.hero--pagina .hero__texto h1{ max-width:18ch; }
+@media (min-width:900px){ .hero--pagina{ min-height:min(76vh, 740px); } }
+
+/* ── caminhos (home) ─────────────────────────────────────── */
+.caminhos{ display:grid; gap:1rem; grid-template-columns:1fr; }
+@media (min-width:820px){ .caminhos{ grid-template-columns:repeat(3,1fr); } .caminhos--dois{ grid-template-columns:repeat(2,1fr); } }
+.caminho{
+  position:relative; display:block; overflow:hidden; border-radius:var(--raio);
+  text-decoration:none; color:var(--base); background:var(--mata); min-height:300px;
+}
+.caminho img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:.7; transition:transform .9s var(--curva, ease), opacity .5s; }
+.caminho::after{ content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(34,48,30,.05) 20%, rgba(34,48,30,.97) 85%); }
+.caminho:hover img{ transform:scale(1.05); opacity:.8; }
+.caminho__txt{ position:absolute; z-index:1; left:0; right:0; bottom:0; padding:1.5rem; display:flex; flex-direction:column; gap:.35rem; }
+.caminho__txt small{ font-size:.74rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#C9DA88; }
+.caminho__txt strong{ font-family:var(--display); font-size:1.6rem; font-weight:500; line-height:1.1; }
+.caminho__txt em{ font-style:normal; font-size:.9rem; color:#E9EDDF; }
+.caminho__txt em::after{ content:" →"; transition:margin .3s; }
+.caminho:hover .caminho__txt em::after{ margin-left:.3rem; }
+.caminho--texto{ min-height:150px; background:var(--mata); }
+.caminho--texto::after{ display:none; }
+.caminho--texto .caminho__txt strong::after{ content:" →"; color:var(--folha); }
+
+/* ── públicos (noivas e debutantes) ──────────────────────── */
+.duas-colunas{ display:grid; gap:2.5rem; grid-template-columns:1fr; }
+@media (min-width:900px){ .duas-colunas{ grid-template-columns:1fr 1fr; gap:3rem; } .duas-colunas--texto{ align-items:center; } }
+.publico img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--raio); margin-bottom:1.5rem; }
+.publico h2{ font-size:clamp(1.6rem,3vw,2.1rem); margin-bottom:1rem; }
+.checks{ list-style:none; padding:0; margin:0 0 1.75rem; display:grid; gap:.7rem; }
+.checks li{ position:relative; padding-left:1.9rem; color:var(--carvao); }
+.checks li::before{
+  content:"✓"; position:absolute; left:0; top:.05rem; width:1.3rem; height:1.3rem; border-radius:50%;
+  display:grid; place-items:center; font-size:.75rem; background:var(--salvia); color:var(--mata);
+}
+
+/* ── cerimônia lado a lado ───────────────────────────────── */
+.cerimonias{ display:grid; gap:1rem; grid-template-columns:1fr; }
+@media (min-width:760px){ .cerimonias{ grid-template-columns:1fr 1fr; } }
+.cerimonias figure{ margin:0; }
+.cerimonias img{ width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:var(--raio); }
+.cerimonias figcaption{ margin-top:.75rem; color:var(--cinza); }
+.cerimonias figcaption strong{ display:block; font-family:var(--display); font-size:1.35rem; font-weight:500; color:var(--mata); }
+
+/* ── troca de ano nas propostas ──────────────────────────── */
+.ano-troca{ display:inline-flex; gap:.25rem; padding:.25rem; margin-bottom:1.75rem; background:var(--salvia); border-radius:999px; }
+.ano-troca button{
+  min-height:44px; padding:.5rem 1.2rem; border:0; border-radius:999px; background:transparent;
+  font:500 .92rem var(--corpo); color:var(--mata); cursor:pointer; transition:background .3s, color .3s;
+}
+.ano-troca button[aria-selected="true"]{ background:var(--mata); color:var(--base); }
+.pacote__preco strong{ transition:opacity .25s; }
+.pacote__preco strong.is-trocando{ opacity:0; }
+
+/* ── corporativo ─────────────────────────────────────────── */
+.compara{ list-style:none; padding:0; margin:0; display:grid; gap:.6rem; }
+.compara li{ position:relative; padding:.85rem 1rem .85rem 2.75rem; border-radius:var(--raio); background:var(--base); border:1px solid var(--borda); }
+.compara li::before{ position:absolute; left:1rem; top:.85rem; font-weight:600; }
+.compara__nao{ color:var(--cinza); }
+.compara__nao::before{ content:"✕"; color:#8A2B2B; }
+.compara__sim{ color:var(--carvao); border-color:var(--folha) !important; background:var(--salvia-cl) !important; }
+.compara__sim::before{ content:"✓"; color:var(--folha-esc); }
+.ficha dl{ margin:0; display:grid; grid-template-columns:1fr; border-top:1px solid var(--borda); }
+@media (min-width:760px){ .ficha dl{ grid-template-columns:1fr 1fr; column-gap:3rem; } }
+.ficha dl > div{ display:grid; grid-template-columns:8.5rem 1fr; gap:1rem; padding:1.1rem 0; border-bottom:1px solid var(--borda); }
+.ficha dt{ font-size:.75rem; letter-spacing:.16em; text-transform:uppercase; color:var(--folha-esc); padding-top:.15rem; }
+.ficha dd{ margin:0; color:var(--carvao); }
+.formatos{ display:grid; gap:1rem; grid-template-columns:1fr; margin-bottom:2rem; }
+@media (min-width:820px){ .formatos{ grid-template-columns:repeat(3,1fr); } }
+.formatos article{ padding:1.75rem; border:1px solid var(--borda); border-radius:var(--raio); background:var(--base); transition:transform .3s, border-color .3s; }
+.formatos article:hover{ transform:translateY(-3px); border-color:var(--folha); }
+.formatos h3{ font-size:1.35rem; margin-bottom:.5rem; }
+.formatos p{ margin:0; color:var(--cinza); }
+
+/* ── portfólio ───────────────────────────────────────────── */
+.pagina-topo{ padding-top:calc(var(--ritmo) * .8); padding-bottom:1.5rem; }
+.pagina-topo__titulo{ color:var(--mata); max-width:none; }
+.secao--colada{ padding-top:0; }
+.filtros{ display:flex; flex-wrap:wrap; gap:.5rem; }
+.filtros button{
+  min-height:44px; padding:.5rem 1.1rem; border:1px solid var(--borda); border-radius:999px;
+  background:var(--base); font:500 .9rem var(--corpo); color:var(--mata); cursor:pointer;
+}
+.filtros button[aria-pressed="true"]{ background:var(--mata); border-color:var(--mata); color:var(--base); }
+.galeria--portfolio .galeria__item{ cursor:zoom-in; transition:opacity .35s, transform .35s; }
+.galeria--portfolio .galeria__item.is-oculto{ display:none; }
+.galeria--portfolio figure{ overflow:hidden; border-radius:var(--raio); }
+.galeria--portfolio img{ transition:transform .8s var(--curva, ease); }
+.galeria--portfolio .galeria__item:hover img{ transform:scale(1.04); }
+.galeria--portfolio figcaption{ padding:0 .1rem; }
+.lupa{ border:0; padding:0; background:transparent; max-width:min(1200px, 94vw); }
+.lupa::backdrop{ background:rgba(20,26,18,.88); }
+.lupa img{ display:block; width:100%; max-height:82vh; object-fit:contain; border-radius:var(--raio); }
+.lupa p{ margin:.75rem 0 0; color:#E9EDDF; text-align:center; }
+.lupa__fechar{
+  position:absolute; top:.5rem; right:.5rem; width:44px; height:44px; border-radius:50%; border:0;
+  background:rgba(250,250,244,.92); color:var(--mata); font-size:1.6rem; line-height:1; cursor:pointer;
+}
+
+@media (prefers-reduced-motion:reduce){
+  .caminho img, .galeria--portfolio img, .formatos article, .menu-botao span{ transition:none !important; }
+}
+
+/* ── depoimento em vídeo (corporativo) ───────────────────── */
+.secao--escuro{ background:var(--mata); color:var(--base); }
+.secao--escuro .sobrancelha{ color:#C9DA88; }
+.depo{ display:grid; gap:2.5rem; grid-template-columns:1fr; align-items:center; }
+@media (min-width:860px){ .depo{ grid-template-columns:minmax(260px,360px) 1fr; gap:4rem; } }
+.depo__video video{ display:block; width:100%; max-width:360px; margin:0 auto; aspect-ratio:464/848; object-fit:cover; border-radius:var(--raio); background:#141a12; }
+.depo blockquote{ margin:0 0 2rem; }
+.depo blockquote p{ font-family:var(--display); font-size:clamp(1.35rem,2.6vw,1.9rem); line-height:1.35; margin:0 0 1.25rem; }
+.depo footer{ font-size:.95rem; color:#D7DECB; }
+.depo footer strong{ color:var(--base); }
+@media (min-width:820px){ .formatos{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:1100px){ .formatos{ grid-template-columns:repeat(4,1fr); } }
+.secao--escuro .btn{ background:#C9DA88; color:var(--mata); border-color:#C9DA88; }
+.secao--escuro .btn:hover{ background:var(--base); border-color:var(--base); }
+.flutuante{ box-shadow:0 0 0 1px rgba(250,250,244,.35), 0 8px 24px rgba(0,0,0,.25); }
+
+/* ── cabeçalho: logo inteiro e legível (o logo já traz o nome) ── */
+.topo__linha{ min-height:76px; gap:1rem; }
+.topo__logo{ width:auto; height:58px; aspect-ratio:520/345; object-fit:contain; }
+@media (min-width:1000px){ .topo__logo{ height:64px; } .topo__linha{ min-height:84px; } }
+.topo__nome{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.topo{ background:rgba(250,250,244,.97); box-shadow:0 1px 0 var(--borda), 0 6px 18px rgba(34,48,30,.06); border-bottom:0; }
