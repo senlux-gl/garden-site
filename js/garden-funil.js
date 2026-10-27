@@ -55,6 +55,10 @@
 
   function wa(texto){ return "https://wa.me/" + NUM + "?text=" + encodeURIComponent(texto); }
 
+  /* medição do Garden (js/garden-medicao.js); sem o arquivo ou sem IDs, não faz nada */
+  function medir(ev, dados){ if (window.GardenMedicao) window.GardenMedicao.medir(ev, dados); }
+  function marca(){ var et = window.GardenMedicao && window.GardenMedicao.etiqueta(); return et ? "-" + et : ""; }
+
   function mensagem(){
     var l = ["Olá! Vim pelo site do Espaço Garden."];
     if (r.nome) l[0] = "Olá! Sou " + r.nome + " e vim pelo site do Espaço Garden.";
@@ -64,7 +68,7 @@
     if (r.formato) l.push("Formato: " + ROTULO["formato:"+r.formato]);
     if (r.proposta) l.push("Proposta: " + ROTULO["proposta:"+r.proposta]);
     l.push(r.tipo === "empresa" ? "Quero receber a proposta e agendar a visita técnica." : "Quero saber se a data está livre e agendar uma visita.");
-    l.push("[funil-" + origem + "]");
+    l.push("[funil-" + origem + marca() + "]");
     return l.join("\n");
   }
 
@@ -102,6 +106,8 @@
       seguir.hidden = false; seguir.textContent = r.tipo === "empresa" ? "Receber proposta no WhatsApp" : "Consultar data no WhatsApp";
       seguir.onclick = function(){
         r.nome = inp.value.replace(/\s+/g," ").trim().slice(0,60);
+        /* sem nome: o nome fica só na conversa */
+        medir("generate_lead", { oferta: r.proposta || r.formato || "", evento: r.tipo, quando: r.quando, pessoas: r.convidados, origem: origem });
         window.open(wa(mensagem()), "_blank", "noopener");
         $(".funil__barra span").style.width = "100%";
         d.close();
@@ -135,6 +141,7 @@
     if (preset){ r.tipo = preset; i = 1; }
     if (prop) r.proposta = prop;
     render();
+    medir("funil_iniciado", { origem: origem });
     if (typeof d.showModal === "function") d.showModal(); else d.setAttribute("open","");
   }
 
@@ -143,7 +150,8 @@
   d.addEventListener("click", function(e){ if (e.target === d) d.close(); });
   $(".funil__pular").addEventListener("click", function(e){
     e.preventDefault();
-    var t = (window.GARDEN_SAUDACAO || "Olá! Vim pelo site e gostaria de agendar uma visita ao Espaço Garden.") + " [direto-" + origem + "]";
+    var t = (window.GARDEN_SAUDACAO || "Olá! Vim pelo site e gostaria de agendar uma visita ao Espaço Garden.") + " [direto-" + origem + marca() + "]";
+    medir("contato_direto", { origem: origem });
     window.open(wa(t), "_blank", "noopener"); d.close();
   });
 
