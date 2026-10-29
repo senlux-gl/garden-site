@@ -8,7 +8,7 @@
   var GA4 = "";                 /* G-XXXXXXX da propriedade do Garden */
   var ADS = "";                 /* AW-XXXXXXX da conta Google Ads do Garden */
   var ROTULO = { lead: "", direto: "" };   /* rótulos das conversões no Google Ads */
-  var PIXEL = "";               /* ID do pixel (conjunto de dados) do Garden na Meta */
+  var PIXEL = "1099609106029176"; /* pixel "Garden · Site e funil", conta 936427345967738 */
 
   var w = window, doc = document;
   var CHAVE = "garden_origem";
