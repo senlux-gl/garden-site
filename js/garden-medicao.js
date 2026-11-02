@@ -6,8 +6,8 @@
 (function(){
   "use strict";
   var GA4 = "";                 /* G-XXXXXXX da propriedade do Garden */
-  var ADS = "";                 /* AW-XXXXXXX da conta Google Ads do Garden */
-  var ROTULO = { lead: "", direto: "" };   /* rótulos das conversões no Google Ads */
+  var ADS = "AW-17529723931";   /* conta Google Ads do Garden 488-654-4893 */
+  var ROTULO = { lead: "r7N9CIDDzrAdEJu46aZB", direto: "0hexCIPDzrAdEJu46aZB" };   /* "Garden · Funil concluído (WhatsApp)" e "Garden · WhatsApp direto (site)", criadas em 02/11/2026 */
   var PIXEL = "1099609106029176"; /* pixel "Garden · Site e funil", conta 936427345967738 */
 
   var w = window, doc = document;
