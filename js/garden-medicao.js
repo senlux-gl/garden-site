@@ -67,6 +67,10 @@
       if (evento === "funil_iniciado") w.fbq("trackCustom", "FunilIniciado", meta, id);
       else if (evento === "generate_lead") w.fbq("track", "Lead", meta, id);
       else if (evento === "contato_direto") w.fbq("track", "Contact", meta, id);
+      /* 14/11/2026: uma resposta do funil vira "FunilResp_<pergunta>" (ex.: FunilResp_convidados, valor 100a150),
+         para ler pela API em que pergunta a pessoa para. Só a opção marcada; nome e data nunca vão. */
+      else if (evento === "funil_resposta" && /^[a-z]+$/.test(dados.passo || ""))
+        w.fbq("trackCustom", "FunilResp_" + dados.passo, { content_name: dados.valor || "", content_category: dados.origem || "" }, id);
     }
   }
 

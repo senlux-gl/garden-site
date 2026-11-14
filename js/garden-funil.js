@@ -51,8 +51,9 @@
     '</form>';
   doc.body.appendChild(d);
   var $ = function(s){ return d.querySelector(s); };
-  var r = {}, i = 0, origem = "site", seq = [];
-
+  var r = {}, i = 0, origem = "site", seq = [], vistos = {};
+  /* 14/11/2026, pedido do Guilherme: "tudo múltipla escolha", o lead não tem paciência para digitar.
+     A última tela não tem campo: só o resumo e o botão. Nome e data ficam para a conversa. */
   function wa(texto){ return "https://wa.me/" + NUM + "?text=" + encodeURIComponent(texto); }
 
   /* medição do Garden (js/garden-medicao.js); sem o arquivo ou sem IDs, não faz nada */
@@ -67,7 +68,8 @@
     l.push("Pessoas: " + (ROTULO["convidados:"+r.convidados] || "-"));
     if (r.formato) l.push("Formato: " + ROTULO["formato:"+r.formato]);
     if (r.proposta) l.push("Proposta: " + ROTULO["proposta:"+r.proposta]);
-    l.push(r.tipo === "empresa" ? "Quero receber a proposta e agendar a visita técnica." : "Quero saber se a data está livre e agendar uma visita.");
+    l.push(r.tipo === "empresa" ? "Quero receber a proposta e agendar a visita técnica."
+         : "Quero agendar uma visita para conhecer o espaço.");
     l.push("[funil-" + origem + marca() + "]");
     return l.join("\n");
   }
@@ -86,18 +88,14 @@
     seq = passos(r);
     var k = seq[i], total = seq.length;
     $(".funil__barra span").style.width = Math.round((i) / total * 100) + "%";
-    $(".funil__passo").textContent = "Pergunta " + (i+1) + " de " + total;
+    $(".funil__passo").textContent = k === "nome" ? "Último passo" : "Pergunta " + (i+1) + " de " + (total-1);
     $(".funil__voltar").style.visibility = i ? "visible" : "hidden";
     var corpo = $(".funil__corpo"), seguir = $(".funil__seguir"), av = $(".funil__aviso");
     corpo.textContent = ""; av.hidden = true;
     if (k === "nome"){
-      $(".funil__titulo").textContent = "Pronto. Como podemos te chamar?";
+      $(".funil__titulo").textContent = "Pronto. É só mandar no WhatsApp.";
       var txt = aviso();
       if (txt){ av.textContent = txt; av.hidden = false; }
-      var lab = doc.createElement("label"); lab.className = "funil__campo";
-      lab.innerHTML = '<span>Seu nome (opcional)</span><input type="text" name="nome" autocomplete="given-name" maxlength="60">';
-      var inp = lab.querySelector("input"); inp.value = r.nome || "";
-      corpo.appendChild(lab);
       var res = doc.createElement("ul"); res.className = "funil__resumo";
       [["Evento",ROTULO["tipo:"+r.tipo]],["Quando",ROTULO["quando:"+r.quando]],["Pessoas",ROTULO["convidados:"+r.convidados]],
        r.formato ? ["Formato",ROTULO["formato:"+r.formato]] : null, r.proposta ? ["Proposta",ROTULO["proposta:"+r.proposta]] : null]
@@ -105,15 +103,12 @@
       corpo.appendChild(res);
       seguir.hidden = false; seguir.textContent = r.tipo === "empresa" ? "Receber proposta no WhatsApp" : "Consultar data no WhatsApp";
       seguir.onclick = function(){
-        r.nome = inp.value.replace(/\s+/g," ").trim().slice(0,60);
-        /* sem nome: o nome fica só na conversa */
         medir("generate_lead", { oferta: r.proposta || r.formato || "", evento: r.tipo, quando: r.quando, pessoas: r.convidados, origem: origem });
         window.open(wa(mensagem()), "_blank", "noopener");
         $(".funil__barra span").style.width = "100%";
         d.close();
       };
-      inp.addEventListener("keydown", function(e){ if (e.key === "Enter"){ e.preventDefault(); seguir.click(); } });
-      setTimeout(function(){ inp.focus(); }, 50);
+      setTimeout(function(){ seguir.focus(); }, 50);
       return;
     }
     seguir.hidden = true;
@@ -127,6 +122,8 @@
       b.addEventListener("click", function(){
         r[k] = o[0];
         if (k === "tipo"){ if (o[0] === "empresa") delete r.proposta; else delete r.formato; }
+        /* 14/11/2026: cada resposta conta uma vez por abertura, para ver em que pergunta a pessoa para */
+        if (!vistos[k]){ vistos[k] = 1; medir("funil_resposta", { passo: k, valor: o[0], origem: origem }); }
         b.classList.add("is-marcada");
         setTimeout(function(){ i++; render(); }, 180);
       });
@@ -137,7 +134,7 @@
   }
 
   function abrir(org, preset, prop){
-    origem = org || pagina; r = {}; i = 0;
+    origem = org || pagina; r = {}; i = 0; vistos = {};
     if (preset){ r.tipo = preset; i = 1; }
     if (prop) r.proposta = prop;
     render();
