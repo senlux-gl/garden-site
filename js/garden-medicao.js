@@ -9,6 +9,7 @@
   var ADS = "AW-17529723931";   /* conta Google Ads do Garden 488-654-4893 */
   var ROTULO = { lead: "r7N9CIDDzrAdEJu46aZB", direto: "0hexCIPDzrAdEJu46aZB" };   /* "Garden · Funil concluído (WhatsApp)" e "Garden · WhatsApp direto (site)", criadas em 02/11/2026 */
   var PIXEL = "1099609106029176"; /* pixel "Garden · Site e funil", conta 936427345967738 */
+  var PIXEL_NOVO = "968767645936078"; /* 14/11/2026: pixel "Garden Eventos" da conta própria act_1480265543998657, onde a campanha roda; recebe os mesmos eventos */
 
   var w = window, doc = document;
   var CHAVE = "garden_origem";
@@ -45,6 +46,7 @@
     p.src = "https://connect.facebook.net/en_US/fbevents.js";
     doc.head.appendChild(p);
     w.fbq("init", PIXEL);
+    if (PIXEL_NOVO) w.fbq("init", PIXEL_NOVO);
     w.fbq("track", "PageView");
     if (oferta) w.fbq("track", "ViewContent", { content_name: oferta });
   }
