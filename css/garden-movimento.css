@@ -1,0 +1,88 @@
+/* Espaço Garden · movimento na rolagem (GSAP), 17/11/2026.
+   Camada só visual. Sem a biblioteca, ou com "reduzir movimento" ligado,
+   tudo aparece parado e legível: os estados escondidos só existem quando o JS liga .mv-on. */
+
+/* ── títulos que sobem linha por linha ───────────────────── */
+.mv-on h2.mv-titulo{ opacity:1; transform:none; }
+.mv-on .mv-linha-mask{ padding-bottom:.12em; margin-bottom:-.12em; }
+
+/* ── passeio pelo Garden ─────────────────────────────────── */
+.passeio{
+  position:relative; overflow:hidden; color:var(--base);
+  background:
+    radial-gradient(60% 70% at 85% 110%, rgba(169,190,99,.16), transparent 70%),
+    radial-gradient(40% 50% at 0% 0%, rgba(232,199,122,.07), transparent 70%),
+    var(--mata-esc);
+  padding-block:var(--ritmo);
+}
+.passeio__intro{ padding-inline:var(--gutter); max-width:34rem; }
+.passeio__intro .sobrancelha{ color:var(--folha); }
+.passeio__intro h2{ color:var(--base); margin:.35rem 0 .6rem; }
+.passeio__intro p{ color:#D3DAC5; margin:0; max-width:34ch; }
+.passeio__progresso{ display:none; }
+
+.passeio__janela{
+  margin-top:2rem; overflow-x:auto; overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory; scrollbar-width:none; -webkit-overflow-scrolling:touch;
+}
+.passeio__janela::-webkit-scrollbar{ display:none; }
+.passeio__trilho{
+  display:flex; gap:1rem; width:max-content; margin:0; padding:0 var(--gutter); list-style:none;
+}
+.passeio__foto{ margin:0; width:min(74vw, 340px); scroll-snap-align:center; }
+.passeio__foto figure{ margin:0; }
+.passeio__moldura{
+  position:relative; overflow:hidden; aspect-ratio:4/5; border-radius:var(--raio);
+  background:var(--mata); box-shadow:0 30px 60px -40px rgba(0,0,0,.6);
+}
+.passeio__moldura img{
+  position:absolute; top:0; left:-8%; width:116%; height:100%; object-fit:cover; display:block;
+}
+.passeio__foto figcaption{
+  display:flex; align-items:baseline; gap:.7rem; margin-top:.85rem;
+  font-family:var(--display); font-size:1.3rem; line-height:1.2; color:var(--base);
+}
+.passeio__foto figcaption small{
+  font-family:var(--corpo); font-size:.72rem; letter-spacing:.14em; color:var(--folha); font-weight:600;
+}
+
+@media (min-width:900px){
+  .mv-on .passeio{ padding-block:0; }
+  .mv-on .passeio__palco{
+    display:grid; grid-template-columns:minmax(300px, 30vw) 1fr; align-items:center;
+    height:100vh; height:100svh;
+  }
+  .mv-on .passeio__intro{ padding-left:max(var(--gutter), calc((100vw - var(--wrap)) / 2)); padding-right:2.5rem; position:relative; z-index:2; }
+  .mv-on .passeio__progresso{
+    display:block; position:relative; height:1px; margin-top:2rem; width:9rem; background:rgba(233,237,223,.18);
+  }
+  .mv-on .passeio__progresso i{
+    position:absolute; inset:0; background:linear-gradient(90deg, var(--folha), #E8C77A);
+    transform:scaleX(0); transform-origin:0 50%;
+  }
+  .mv-on .passeio__janela{
+    margin-top:0; height:100%; overflow:hidden; scroll-snap-type:none; display:flex; align-items:center;
+    -webkit-mask-image:linear-gradient(90deg, transparent 0, #000 6%, #000 100%);
+            mask-image:linear-gradient(90deg, transparent 0, #000 6%, #000 100%);
+  }
+  .mv-on .passeio__trilho{ gap:clamp(1.25rem, 2.4vw, 2.5rem); padding-left:3vw; padding-right:12vw; align-items:center; }
+  .mv-on .passeio__foto{ width:auto; }
+  .mv-on .passeio__moldura{ height:58vh; width:46.4vh; aspect-ratio:auto; }
+  .mv-on .passeio__foto:nth-child(even){ margin-top:12vh; }
+  .mv-on .passeio__foto:nth-child(odd){ margin-bottom:6vh; }
+  /* sem GSAP no computador: fileira que desliza com o trackpad */
+  .passeio__foto{ width:clamp(300px, 26vw, 420px); }
+}
+
+/* ── janela em arco que se abre para o jardim ────────────── */
+.janela{ background:var(--mata); padding-top:clamp(2rem, 6vw, 4rem); }
+.janela__palco{ height:78vh; height:78svh; padding-inline:var(--gutter); }
+.janela__moldura{ position:relative; height:100%; overflow:hidden; border-radius:var(--raio); background:var(--mata-esc); }
+.janela__moldura img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; }
+.mv-on .janela__palco{ height:100vh; height:100svh; padding-inline:0; }
+.mv-on .janela__moldura{ border-radius:0; will-change:clip-path; }
+.mv-on .janela + .fechamento{ padding-top:clamp(3rem, 7vw, 5rem); }
+
+@media (prefers-reduced-motion:reduce){
+  .passeio__janela{ scroll-behavior:auto; }
+}
