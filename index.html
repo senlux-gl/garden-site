@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/garden-v2.css">
 <link rel="stylesheet" href="/css/garden-fx.css">
 <link rel="stylesheet" href="/css/garden-funil.css">
+<link rel="stylesheet" href="/css/garden-movimento.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"EventVenue","@id":"https://espacogardeneventos.com.br/#espaco","name":"Espaço Garden Eventos","url":"https://espacogardeneventos.com.br/","image":"https://espacogardeneventos.com.br/img/og-capa.jpg","description":"Espaço de eventos em Pendotiba, Niterói: casamentos, debutantes e eventos corporativos com buffet próprio, jardim, salão climatizado, gerador e estacionamento.","address":{"@type":"PostalAddress","streetAddress":"Estr. Caetano Monteiro, 4036","addressLocality":"Niterói","addressRegion":"RJ","postalCode":"24320-570","addressCountry":"BR"},"sameAs":["https://www.facebook.com/espacogardeneventos"],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday","Saturday"],"opens":"10:00","closes":"18:00"}]}
 </script>
@@ -112,6 +113,28 @@
     </div>
   </section>
 
+  <section class="passeio" id="passeio" aria-label="Um passeio pelo Espaço Garden em fotos">
+    <div class="passeio__palco">
+      <div class="passeio__intro">
+        <p class="sobrancelha">Um passeio pelo Garden</p>
+        <h2>Da chegada à pista, tudo no mesmo lugar.</h2>
+        <p>O jardim, a cerimônia, o salão e a festa, sem ninguém pegar o carro no meio do caminho.</p>
+        <div class="passeio__progresso" aria-hidden="true"><i></i></div>
+      </div>
+      <div class="passeio__janela">
+        <ul class="passeio__trilho">
+          <li class="passeio__foto"><figure><div class="passeio__moldura"><img src="/img/espaco-fachada.webp" alt="Entrada do Espaço Garden iluminada à noite" loading="lazy" width="1200" height="900"></div><figcaption><small>01</small>A chegada</figcaption></figure></li>
+          <li class="passeio__foto"><figure><div class="passeio__moldura"><img src="/img/espaco-jardim.webp" alt="Bancos e passadeira debaixo dos bambus" loading="lazy" width="1200" height="900"></div><figcaption><small>02</small>O jardim</figcaption></figure></li>
+          <li class="passeio__foto"><figure><div class="passeio__moldura"><img src="/img/espaco-cerimonia-externa.webp" alt="Portal de flores do altar ao ar livre" loading="lazy" width="1200" height="900"></div><figcaption><small>03</small>Cerimônia ao ar livre</figcaption></figure></li>
+          <li class="passeio__foto"><figure><div class="passeio__moldura"><img src="/img/espaco-cascata.webp" alt="Cascata e espelho d'água" loading="lazy" width="1200" height="900"></div><figcaption><small>04</small>Cascata e espelho d'água</figcaption></figure></li>
+          <li class="passeio__foto"><figure><div class="passeio__moldura"><img src="/img/espaco-salao-casamento.webp" alt="Salão montado para casamento com árvores brancas" loading="lazy" width="1200" height="900"></div><figcaption><small>05</small>O salão climatizado</figcaption></figure></li>
+          <li class="passeio__foto"><figure><div class="passeio__moldura"><img src="/img/espaco-mesa-imperial.webp" alt="Mesa imperial posta à noite" loading="lazy" width="854" height="640"></div><figcaption><small>06</small>O jantar</figcaption></figure></li>
+          <li class="passeio__foto"><figure><div class="passeio__moldura"><img src="/img/espaco-pista-telao.webp" alt="Pista de LED e telão de LED no salão" loading="lazy" width="1280" height="720" style="object-position:62% 50%"></div><figcaption><small>07</small>A pista</figcaption></figure></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <section class="secao" id="como-funciona">
     <div class="wrap">
       <p class="sobrancelha" data-reveal>Como funciona</p>
@@ -163,6 +186,12 @@
     </div>
   </section>
 
+  <section class="janela" aria-label="O jardim do Espaço Garden">
+    <div class="janela__palco">
+      <div class="janela__moldura"><img src="/img/hero.webp" alt="Cerimônia montada no bambuzal, vista do corredor" loading="lazy" width="1200" height="900"></div>
+    </div>
+  </section>
+
   <section class="fechamento">
     <div class="wrap wrap--estreito">
       <h2 data-reveal>Venha ver o jardim.</h2>
@@ -197,5 +226,9 @@
 <script src="/js/garden-fx.js"></script>
 <script src="/js/garden-medicao.js"></script>
 <script src="/js/garden-funil.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" integrity="sha384-3vCAhD+a3BOliP3QqjQINn6ZWiZxoqu0WFxX5ZQZgqekDZuSb1mJBrrLMmu94H8f" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" integrity="sha384-H2WL1iy/jKQQ7MTHU2hskZKNHTYWWD/KgKE1vCNnaWY8An2ESTh23KN/fTp8XS3j" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js" integrity="sha384-e98MX/fxZrUXA/6T+aCptryLfHgR2FpEmWxDbbPloHT0Qg79dEXKdLJ/iwD2lzxs" crossorigin="anonymous"></script>
+<script defer src="/js/garden-movimento.js"></script>
 </body>
 </html>

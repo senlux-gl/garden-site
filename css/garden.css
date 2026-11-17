@@ -210,6 +210,7 @@ a{ color:var(--mata); }
   width:8px; height:8px; border-radius:50%; background:var(--folha);
 }
 .pacote .btn{ align-self:flex-start; }
+.pacote__nota{ margin:-1.25rem 0 1.75rem; font-size:.85rem; color:var(--cinza); }
 
 .aviso{ background:var(--base); border-left:3px solid var(--folha); padding:1.5rem 1.75rem; border-radius:var(--raio); }
 .aviso p:last-child{ margin-bottom:0; }

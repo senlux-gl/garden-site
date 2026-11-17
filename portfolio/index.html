@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/css/garden-v2.css">
 <link rel="stylesheet" href="/css/garden-fx.css">
 <link rel="stylesheet" href="/css/garden-funil.css">
+<link rel="stylesheet" href="/css/garden-movimento.css">
 </head>
 <body data-pagina="portfolio">
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
@@ -64,9 +65,15 @@
         <li class="galeria__item galeria__item--largo" data-cat="cerimonia" data-reveal style="--atraso:0ms"><figure><img src="/img/hero.webp" alt="Cerimônia montada no bambuzal, vista do corredor" loading="lazy" width="1200" height="900"><figcaption>Cerimônia no bambuzal</figcaption></figure></li>
         <li class="galeria__item" data-cat="cerimonia" data-reveal style="--atraso:110ms"><figure><img src="/img/espaco-cerimonia-externa.webp" alt="Portal de flores do altar ao ar livre" loading="lazy" width="1200" height="900"><figcaption>Altar ao ar livre</figcaption></figure></li>
         <li class="galeria__item" data-cat="cerimonia" data-reveal style="--atraso:220ms"><figure><img src="/img/espaco-cerimonia-interna.webp" alt="Cerimônia interna com lustres e passadeira de LED" loading="lazy" width="1200" height="900"><figcaption>Cerimônia no salão</figcaption></figure></li>
+        <li class="galeria__item" data-cat="cerimonia" data-reveal style="--atraso:0ms"><figure><img src="/img/espaco-cerimonia-passarela.webp" alt="Cerimônia no salão, com cadeiras e passarela iluminada" loading="lazy" width="1200" height="800"><figcaption>Cerimônia no salão</figcaption></figure></li>
         <li class="galeria__item" data-cat="salao" data-reveal style="--atraso:0ms"><figure><img src="/img/espaco-salao-casamento.webp" alt="Salão com árvores brancas e lounge" loading="lazy" width="1200" height="900"><figcaption>Salão montado para casamento</figcaption></figure></li>
         <li class="galeria__item galeria__item--largo" data-cat="salao" data-reveal style="--atraso:110ms"><figure><img src="/img/espaco-salao-festa.webp" alt="Salão com teto de flores, montado para debutante" loading="lazy" width="1200" height="900"><figcaption>Salão em festa de 15 anos</figcaption></figure></li>
         <li class="galeria__item" data-cat="salao" data-reveal style="--atraso:220ms"><figure><img src="/img/espaco-buffet.webp" alt="Mesa posta com flores e taças" loading="lazy" width="1200" height="900"><figcaption>Mesa posta</figcaption></figure></li>
+        <li class="galeria__item" data-cat="salao" data-reveal style="--atraso:110ms"><figure><img style="object-position:62% 50%" src="/img/espaco-pista-telao.webp" alt="Pista de LED e telão de LED no salão" loading="lazy" width="1280" height="720"><figcaption>Pista e telão de LED</figcaption></figure></li>
+        <li class="galeria__item" data-cat="salao" data-reveal style="--atraso:110ms"><figure><img src="/img/espaco-doces.webp" alt="Mesa de doces com flores naturais" loading="lazy" width="1200" height="900"><figcaption>Mesa de doces</figcaption></figure></li>
+        <li class="galeria__item" data-cat="salao" data-reveal style="--atraso:220ms"><figure><img src="/img/espaco-bolo.webp" alt="Bolo de casamento com flores e espelhos" loading="lazy" width="854" height="640"><figcaption>Bolo e doces</figcaption></figure></li>
+        <li class="galeria__item" data-cat="salao" data-reveal style="--atraso:0ms"><figure><img src="/img/espaco-salao-dia.webp" alt="Salão claro de dia, com mesas redondas e flores" loading="lazy" width="1200" height="900"><figcaption>O salão de dia</figcaption></figure></li>
+        <li class="galeria__item" data-cat="salao" data-reveal style="--atraso:110ms"><figure><img src="/img/espaco-mesa-imperial.webp" alt="Mesa imperial posta à noite" loading="lazy" width="854" height="640"><figcaption>Mesa imperial</figcaption></figure></li>
         <li class="galeria__item galeria__item--largo" data-cat="jardim" data-reveal style="--atraso:0ms"><figure><img src="/img/espaco-jardim.webp" alt="Bancos e passadeira debaixo dos bambus" loading="lazy" width="1200" height="900"><figcaption>O jardim</figcaption></figure></li>
         <li class="galeria__item" data-cat="jardim" data-reveal style="--atraso:110ms"><figure><img src="/img/espaco-cascata.webp" alt="Cascata e espelho d'água" loading="lazy" width="1200" height="900"><figcaption>Cascata e chafariz</figcaption></figure></li>
         <li class="galeria__item" data-cat="jardim" data-reveal style="--atraso:220ms"><figure><img src="/img/espaco-fachada.webp" alt="Entrada do Espaço Garden iluminada à noite" loading="lazy" width="1200" height="900"><figcaption>A entrada à noite</figcaption></figure></li>
@@ -116,5 +123,9 @@
 <script src="/js/garden-fx.js"></script>
 <script src="/js/garden-medicao.js"></script>
 <script src="/js/garden-funil.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/gsap.min.js" integrity="sha384-3vCAhD+a3BOliP3QqjQINn6ZWiZxoqu0WFxX5ZQZgqekDZuSb1mJBrrLMmu94H8f" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/ScrollTrigger.min.js" integrity="sha384-H2WL1iy/jKQQ7MTHU2hskZKNHTYWWD/KgKE1vCNnaWY8An2ESTh23KN/fTp8XS3j" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/gsap@3.15.1/dist/SplitText.min.js" integrity="sha384-e98MX/fxZrUXA/6T+aCptryLfHgR2FpEmWxDbbPloHT0Qg79dEXKdLJ/iwD2lzxs" crossorigin="anonymous"></script>
+<script defer src="/js/garden-movimento.js"></script>
 </body>
 </html>
