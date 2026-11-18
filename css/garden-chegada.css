@@ -1,0 +1,105 @@
+/* Espaço Garden · primeira tela da página Noivas e debutantes (17/11/2026).
+   Pedido do Guilherme: quem cai na página precisa entender na hora e tocar no botão.
+   Repete a promessa e o preço do anúncio que mais traz cadastro (C2): "O evento inteiro num lugar só",
+   a partir de R$ 29.900. Foto em cima e bloco verde embaixo, com corte reto (sem véu sobre a foto).
+   Botão e preço aparecem já no primeiro quadro, sem esperar animação. */
+
+.chegada{ display:grid; background:var(--mata-esc); color:var(--base); }
+
+.chegada__foto{ position:relative; overflow:hidden; aspect-ratio:16/9; background:var(--mata); }
+.chegada__foto img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.chegada__foto img.is-slide{ opacity:0; transition:opacity 1.4s ease; }
+.chegada__foto img.is-slide.is-ativa{ opacity:1; }
+
+.chegada__bloco{ padding:1.1rem var(--gutter) 1.9rem; }
+.chegada__texto{ max-width:34rem; }
+
+.chegada__topo{
+  margin:0 0 .6rem; font-size:.72rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:#E8C77A;
+}
+/* selo sólido sobre a foto, no canto (não é véu: a foto fica inteira) */
+.chegada__vagas{
+  position:absolute; left:var(--gutter); bottom:.8rem; z-index:2; margin:0;
+  display:inline-flex; align-items:center; gap:.45rem; padding:.3rem .75rem;
+  border-radius:999px; background:var(--mata-esc); box-shadow:0 4px 14px rgba(0,0,0,.25);
+  font-size:.78rem; font-weight:500; color:#F3E6C2;
+}
+.chegada__vagas i{ width:6px; height:6px; border-radius:50%; background:#E8C77A; box-shadow:0 0 0 0 rgba(232,199,122,.6); animation:chegadaPulso 2.6s ease-out infinite; }
+@keyframes chegadaPulso{ 0%{ box-shadow:0 0 0 0 rgba(232,199,122,.6); } 70%,100%{ box-shadow:0 0 0 7px rgba(232,199,122,0); } }
+
+.chegada h1{
+  font-family:var(--display); font-weight:500; color:#fff;
+  font-size:clamp(2.4rem, 10.6vw, 4.1rem); line-height:1; letter-spacing:-.005em;
+  margin:0 0 .9rem; max-width:15ch;
+}
+
+/* o que vem junto: o check acende um por um, o texto já está lá */
+.chegada__itens{ list-style:none; margin:0 0 1rem; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:.45rem; }
+.chegada__itens li{
+  display:flex; align-items:center; gap:.55rem; padding:.5rem .65rem;
+  border:1px solid rgba(233,237,223,.16); border-radius:8px; background:rgba(255,255,255,.045);
+  font-size:.9rem; line-height:1.2; color:#EEF1E6;
+}
+.chegada__itens li::before{
+  content:""; flex:none; width:18px; height:18px; border-radius:50%;
+  background:#C9DA88 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2.5 6.2l2.2 2.2 4.8-4.9' fill='none' stroke='%2322301E' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat;
+}
+.js .chegada__itens li::before{ transform:scale(.6); opacity:.25; transition:transform .45s cubic-bezier(.23,1,.32,1), opacity .45s ease; }
+.js .chegada.is-pronta .chegada__itens li::before{ transform:none; opacity:1; }
+.js .chegada.is-pronta .chegada__itens li:nth-child(2)::before{ transition-delay:.18s; }
+.js .chegada.is-pronta .chegada__itens li:nth-child(3)::before{ transition-delay:.36s; }
+.js .chegada.is-pronta .chegada__itens li:nth-child(4)::before{ transition-delay:.54s; }
+
+.chegada__preco{
+  display:flex; justify-content:space-between; align-items:flex-end; gap:1rem;
+  padding:.75rem 0; margin:0 0 1rem;
+  border-top:1px solid rgba(232,199,122,.32); border-bottom:1px solid rgba(232,199,122,.32);
+}
+.chegada__preco p{ margin:0; font-size:.8rem; line-height:1.4; color:rgba(233,237,223,.78); }
+.chegada__preco strong{ display:block; font-size:.95rem; font-weight:600; color:#fff; }
+.chegada .chegada__valor{ text-align:right; white-space:nowrap; font-family:var(--display); font-size:2.2rem; line-height:1; color:#E8C77A; }
+.chegada__valor small{ display:block; margin-bottom:.3rem; font-family:var(--corpo); font-size:.68rem; letter-spacing:.14em; text-transform:uppercase; color:rgba(233,237,223,.75); }
+
+.chegada__botao{
+  position:relative; overflow:hidden; width:100%; min-height:58px; gap:.55rem;
+  font-size:1.06rem; background:#C9DA88; border-color:#C9DA88; color:var(--mata-esc);
+  box-shadow:0 12px 30px -14px rgba(201,218,136,.75);
+  transition:background .2s ease, transform .16s cubic-bezier(.23,1,.32,1);
+}
+.chegada__botao:hover{ background:#D8E6A2; border-color:#D8E6A2; color:var(--mata-esc); }
+.chegada__botao:active{ transform:scale(.98); }
+.chegada__botao::after{
+  content:""; position:absolute; top:0; bottom:0; left:-40%; width:30%; pointer-events:none;
+  background:linear-gradient(100deg, transparent, rgba(255,255,255,.45), transparent);
+  animation:chegadaBrilho 6s ease-in-out 1.2s infinite;
+}
+@keyframes chegadaBrilho{ 0%{ left:-40%; } 22%,100%{ left:120%; } }
+.chegada__seta{ display:inline-block; transition:transform .25s ease; }
+.chegada__botao:hover .chegada__seta{ transform:translateX(4px); }
+
+.chegada__ajuda{ margin:.65rem 0 0; text-align:center; font-size:.84rem; line-height:1.45; color:rgba(233,237,223,.8); }
+.chegada__link{ display:block; margin-top:.85rem; text-align:center; font-size:.9rem; color:#E8C77A; text-underline-offset:3px; }
+.chegada__link:hover{ color:#F3E6C2; }
+
+/* celular baixo (iPhone SE e navegador do Instagram com as barras): foto mais baixa para o botão caber na primeira tela */
+@media (max-width:899px) and (max-height:760px){
+  .chegada__foto{ aspect-ratio:16/7; }
+  .chegada h1{ font-size:2.2rem; margin-bottom:.75rem; }
+  .chegada__itens li{ padding:.42rem .6rem; }
+}
+
+@media (min-width:900px){
+  .chegada{ grid-template-columns:minmax(0,1fr) minmax(0,1.15fr); min-height:min(86vh, 820px); }
+  .chegada__foto{ order:2; aspect-ratio:auto; min-height:100%; }
+  .chegada__vagas{ left:1.5rem; bottom:1.5rem; }
+  .chegada__bloco{ display:flex; align-items:center; justify-content:flex-end; padding:3.5rem clamp(2rem,4vw,4rem); }
+  .chegada__texto{ width:100%; max-width:31rem; }
+  .chegada h1{ font-size:clamp(3rem, 4.4vw, 4.2rem); }
+  .chegada__ajuda, .chegada__link{ text-align:left; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .chegada__vagas i, .chegada__botao::after{ animation:none; }
+  .js .chegada__itens li::before{ transform:none; opacity:1; transition:none; }
+  .chegada__foto img.is-slide{ transition:none; }
+}
