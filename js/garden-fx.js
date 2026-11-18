@@ -126,7 +126,7 @@
   /* barra fixa no celular: aparece depois do hero, some no fechamento */
   var barra = doc.querySelector(".fx-barra");
   if (barra){
-    var alvoHero = doc.querySelector(".hero, .pagina-topo"), fim = doc.querySelector(".fechamento");
+    var alvoHero = doc.querySelector(".hero, .pagina-topo, .chegada"), fim = doc.querySelector(".fechamento");
     var heroFora = false, fimDentro = false;
     var atual2 = function(){ barra.classList.toggle("is-visivel", heroFora && !fimDentro); };
     if ("IntersectionObserver" in window){

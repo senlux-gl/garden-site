@@ -1,0 +1,64 @@
+/* Espaço Garden · página de jornada por evento (18/11/2026).
+   Pedido do Guilherme: "o lead tem que cair numa página e passar por uma jornada no site" e
+   "colocar dentro dessa página noivas felizes, para vazar menos". Uma ideia por tela:
+   chegada, a dor, a virada, noivas felizes, ver para acreditar, propostas, como funciona, começar.
+   Sem menu no topo: quem chega do anúncio tem um caminho só. */
+
+.jornada .topo__nav, .jornada .menu-botao{ display:none; }
+.jornada .topo__marca{ pointer-events:none; }
+
+/* passo da jornada: número pequeno em cima do título */
+.degrau{ display:inline-flex; align-items:center; gap:.5rem; margin:0 0 .9rem; font-size:.72rem; font-weight:600;
+  letter-spacing:.16em; text-transform:uppercase; color:var(--folha-esc); }
+.degrau b{ display:inline-grid; place-items:center; width:1.6rem; height:1.6rem; border-radius:50%;
+  background:var(--mata); color:var(--base); font-size:.72rem; letter-spacing:0; }
+
+/* a dor: lista de fornecedores que viram tarefa */
+.dor{ max-width:46rem; }
+.dor h2{ margin-bottom:1rem; }
+.dor__lista{ list-style:none; margin:1.6rem 0 0; padding:0; display:grid; gap:.6rem; }
+.dor__lista li{ display:flex; justify-content:space-between; gap:1rem; padding:.85rem 1rem; border:1px solid var(--borda);
+  border-radius:12px; background:#fff; font-size:1rem; }
+.dor__lista li span{ color:var(--cinza); font-size:.9rem; text-align:right; }
+.dor__fim{ margin:1.4rem 0 0; font-size:1.1rem; color:var(--carvao); }
+
+/* a virada: tudo junto */
+.virada{ display:grid; gap:2rem; align-items:center; }
+.virada img{ width:100%; height:auto; border-radius:14px; display:block; }
+.virada__itens{ list-style:none; margin:1.4rem 0 0; padding:0; display:grid; grid-template-columns:1fr 1fr; gap:.55rem 1rem; }
+.virada__itens li{ position:relative; padding-left:1.6rem; font-size:1rem; }
+.virada__itens li::before{ content:""; position:absolute; left:0; top:.35rem; width:1rem; height:1rem; border-radius:50%;
+  background:var(--folha) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4 8.5l2.5 2.5L12 5.5' fill='none' stroke='%2322301E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/80% no-repeat; }
+.virada__nota{ margin:1rem 0 0; font-size:.9rem; color:var(--cinza); }
+@media (min-width:860px){ .virada{ grid-template-columns:1.05fr 1fr; gap:3.5rem; } }
+
+/* noivas felizes: nota do Google e falas reais */
+.felizes{ background:var(--mata-esc); color:var(--base); }
+.felizes h2{ color:var(--base); }
+.felizes .degrau{ color:#E8C77A; }
+.felizes .degrau b{ background:#E8C77A; color:var(--mata-esc); }
+.nota-google{ display:flex; align-items:center; gap:1rem; margin:1.4rem 0 2rem; }
+.nota-google strong{ font-family:var(--display); font-size:3.4rem; line-height:1; color:#F3E6C2; }
+.nota-google p{ margin:0; font-size:.95rem; color:#D3DAC5; line-height:1.4; }
+.nota-google .estrelas{ display:block; color:#E8C77A; letter-spacing:.12em; font-size:1.05rem; }
+.falas{ display:grid; gap:1rem; }
+.fala{ margin:0; padding:1.4rem 1.4rem 1.2rem; border-radius:14px; background:rgba(250,250,244,.06); border:1px solid rgba(232,199,122,.25); }
+.fala blockquote{ margin:0; font-family:var(--display); font-size:1.35rem; line-height:1.35; color:var(--base); }
+.fala figcaption{ margin-top:.9rem; font-size:.85rem; color:#D3DAC5; }
+.felizes__fonte{ margin:1.4rem 0 0; font-size:.82rem; color:rgba(211,218,197,.75); }
+@media (min-width:860px){ .falas{ grid-template-columns:repeat(3,1fr); } }
+
+/* ver para acreditar: grade de fotos reais */
+.acreditar{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-top:1.6rem; }
+.acreditar figure{ margin:0; position:relative; overflow:hidden; border-radius:12px; }
+.acreditar figure:first-child, .acreditar figure:last-child{ grid-column:1 / -1; }
+.acreditar img{ width:100%; height:100%; aspect-ratio:4/3; object-fit:cover; display:block; }
+.acreditar figure:first-child img{ aspect-ratio:16/9; }
+.acreditar figcaption{ position:absolute; left:.6rem; bottom:.6rem; padding:.25rem .6rem; border-radius:999px;
+  background:var(--mata-esc); color:var(--base); font-size:.78rem; }
+@media (min-width:860px){ .acreditar{ grid-template-columns:repeat(3,1fr); } .acreditar figure:last-child{ grid-column:auto; } .acreditar figure:first-child{ grid-column:span 2; grid-row:span 2; } .acreditar figure:first-child img{ aspect-ratio:auto; } }
+
+/* o botão de seguir aparece no fim de cada degrau, pequeno, sem tirar a pessoa da página */
+.seguir{ margin:2rem 0 0; display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
+.seguir__mais{ font-size:.92rem; color:var(--folha-esc); text-decoration:underline; text-underline-offset:3px; }
+.felizes .seguir__mais{ color:#E8C77A; }
