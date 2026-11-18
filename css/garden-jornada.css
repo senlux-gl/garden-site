@@ -48,6 +48,13 @@
 .felizes__fonte{ margin:1.4rem 0 0; font-size:.82rem; color:rgba(211,218,197,.75); }
 @media (min-width:860px){ .falas{ grid-template-columns:repeat(3,1fr); } }
 
+/* 18/11, v2: casais felizes, fotos reais do fotógrafo do espaço, sem a assinatura */
+.casais{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin:1.6rem 0 0; }
+.casais figure{ margin:0; overflow:hidden; border-radius:14px; }
+.casais img{ width:100%; height:auto; aspect-ratio:4/5; object-fit:cover; display:block; }
+.casais__legenda{ margin:.7rem 0 0; font-size:.85rem; color:#D3DAC5; }
+@media (min-width:860px){ .casais{ grid-template-columns:repeat(4,1fr); gap:1rem; } }
+
 /* ver para acreditar: grade de fotos reais */
 .acreditar{ display:grid; grid-template-columns:1fr 1fr; gap:.6rem; margin-top:1.6rem; }
 .acreditar figure{ margin:0; position:relative; overflow:hidden; border-radius:12px; }
@@ -62,3 +69,8 @@
 .seguir{ margin:2rem 0 0; display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
 .seguir__mais{ font-size:.92rem; color:var(--folha-esc); text-decoration:underline; text-underline-offset:3px; }
 .felizes .seguir__mais{ color:#E8C77A; }
+
+/* página única (18/11): cada público vê só o seu texto. Sem script, fica a versão geral. */
+body[data-publico="casamento"] [data-so]:not([data-so~="casamento"]),
+body[data-publico="15anos"] [data-so]:not([data-so~="15anos"]),
+body[data-publico="geral"] [data-so]:not([data-so~="geral"]){ display:none !important; }
