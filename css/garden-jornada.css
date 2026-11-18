@@ -62,3 +62,8 @@
 .seguir{ margin:2rem 0 0; display:flex; flex-wrap:wrap; gap:.75rem; align-items:center; }
 .seguir__mais{ font-size:.92rem; color:var(--folha-esc); text-decoration:underline; text-underline-offset:3px; }
 .felizes .seguir__mais{ color:#E8C77A; }
+
+/* página única (18/11): cada público vê só o seu texto. Sem script, fica a versão geral. */
+body[data-publico="casamento"] [data-so]:not([data-so~="casamento"]),
+body[data-publico="15anos"] [data-so]:not([data-so~="15anos"]),
+body[data-publico="geral"] [data-so]:not([data-so~="geral"]){ display:none !important; }
