@@ -28,10 +28,10 @@
 <link rel="stylesheet" href="/css/garden-chegada.css">
 <link rel="stylesheet" href="/css/garden-jornada.css">
 </head>
-<body data-pagina="noivas-e-debutantes" data-publico="geral" class="jornada">
+<body data-pagina="noivas-e-debutantes" data-publico="geral">
 <script>(function(){var q=new URLSearchParams(location.search),c=q.get("utm_campaign")||"";if(!c){try{c=JSON.parse(sessionStorage.getItem("garden_origem")||"{}").campanha||"";}catch(e){}}var p=q.get("p")||(/^casamento/.test(c)?"casamento":/^15anos/.test(c)?"15anos":"geral");if(/^(casamento|15anos|geral)$/.test(p))document.body.setAttribute("data-publico",p);})();</script>
 <!-- 18/11/2026: página única para todo lead do anúncio. A jornada é a mesma da /casamento/;
-     o texto de cada público (casamento, 15 anos, geral) está aqui em data-so e o js/garden-publico.js
+     com o menu e o rodapé do site (18/11, pedido dele: "não dá para navegar", o site é um só); o texto de cada público (casamento, 15 anos, geral) está aqui em data-so e o js/garden-publico.js
      escolhe pelo utm_campaign do anúncio. Sem o script, aparece a versão geral. -->
 <a class="skip" href="#conteudo">Pular para o conteúdo</a>
 <header class="topo" id="topo">
@@ -272,6 +272,28 @@
     </div>
   </section>
 
+  <section class="secao" id="onde-fica">
+    <div class="wrap onde">
+      <div class="onde__texto">
+        <p class="sobrancelha" data-reveal>Onde fica</p>
+        <h2 data-reveal style="--atraso:80ms">Pendotiba, Niterói.</h2>
+        <address>Estr. Caetano Monteiro, 4036<br>Pendotiba &middot; Niterói &middot; RJ<br>CEP 24320-570</address>
+        <dl class="onde__dados">
+          <dt>Visitas</dt><dd>Terça a sábado, 10h às 18h, com hora marcada</dd>
+          <dt>Sem visita</dt><dd>Segunda e domingo</dd>
+          <dt>Estacionamento</dt><dd>Próprio, mais de 70 vagas</dd>
+        </dl>
+        <p class="onde__acoes">
+          <a class="btn js-whats" href="#" data-origem="noivas-onde-fica">Agendar visita</a>
+          <a class="btn btn--vazado" href="https://www.google.com/maps/search/?api=1&amp;query=Estr.+Caetano+Monteiro,+4036,+Pendotiba,+Niter%C3%B3i,+RJ,+24320-570" target="_blank" rel="noopener">Abrir no mapa</a>
+        </p>
+      </div>
+      <div class="onde__mapa" data-reveal style="--atraso:200ms">
+        <iframe title="Mapa do Espaço Garden Eventos em Pendotiba, Niterói" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Estr.%20Caetano%20Monteiro%2C%204036%2C%20Pendotiba%2C%20Niter%C3%B3i%2C%20RJ%2C%2024320-570&amp;output=embed"></iframe>
+      </div>
+    </div>
+  </section>
+
   <section class="fechamento">
     <div class="wrap wrap--estreito">
       <h2 data-reveal>Venha ver o jardim e o salão.</h2>
@@ -290,6 +312,7 @@
     </div>
     <nav class="rodape__nav" aria-label="Rodapé">
       <a href="/">Início</a>
+      <a href="/noivas-e-debutantes/">Noivas e debutantes</a>
       <a href="/corporativo/">Corporativo</a>
       <a href="/portfolio/">Portfólio</a>
       <a href="https://www.facebook.com/espacogardeneventos" target="_blank" rel="noopener">Facebook</a>
